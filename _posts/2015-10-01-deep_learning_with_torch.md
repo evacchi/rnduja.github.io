@@ -33,4 +33,5 @@ If you're looking for a technical introduction to deep architectures, I recommen
 Here it is the list of arguments faced:
 
 - [initial setup](/2015/10/02/deep_learning_with_torch_step_0_setup/)
-- [torch nn module](2015/10/03/deep_learning_with_torch_step_1_nn_module/)
+- [nn Modules](/2015/10/03/deep_learning_with_torch_step_1_nn_module/)
+- [nn Containers](/2015/10/04/deep_learning_with_torch_step_2_nn_containers/)

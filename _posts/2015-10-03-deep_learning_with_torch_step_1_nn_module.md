@@ -1,14 +1,14 @@
 ---
 layout:     post
 title:      "Deep Learning with Torch: 1"
-subtitle:   "understand torch nn library"
+subtitle:   "understand torch module class"
 date:       2015-10-03 12:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post-bg-01.jpg"
 ---
 
 ##Abstract
-In this post we analyze the first step to build a Deep Neural Network using [torch](http://torch.ch/). In particular, we focus on [torch/nn module](https://github.com/torch/nn).
+In this post we analyze the first step to build a Deep Neural Network using [torch](http://torch.ch/). In particular, we focus on [Module](https://github.com/torch/nn).
 
 ---------------------------
 
