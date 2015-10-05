@@ -4,7 +4,7 @@ title:      "Deep Learning with Torch: 1"
 subtitle:   "understand torch module class"
 date:       2015-10-03 12:00:00
 author:     "Fabio Fumarola"
-header-img: "img/post-bg-01.jpg"
+header-img: "img/rnduja.jpg"
 ---
 
 ##Abstract
