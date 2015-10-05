@@ -1,10 +1,10 @@
 ---
 layout:     post
 title:      "Deep Learning with Torch: 0"
-subtitle:   "how to setup Torch"
+subtitle:   "How to setup Torch"
 date:       2015-10-02 12:00:00
 author:     "Fabio Fumarola"
-header-img: "img/post-bg-01.jpg"
+header-img: "img/rnduja.jpg"
 ---
 
 

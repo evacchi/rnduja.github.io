@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Deep Learning with Torch: 1"
-subtitle:   "understand torch module class"
+subtitle:   "Understand torch module class"
 date:       2015-10-03 12:00:00
 author:     "Fabio Fumarola"
 header-img: "img/rnduja.jpg"
