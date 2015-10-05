@@ -8,8 +8,8 @@ header-img: "img/rnduja.jpg"
 ---
 
 
-**Abstract:** In this post we analyze how to install torch, lua and luarocks.
-The document is extracted from [getting started with Torch](http://torch.ch/docs/getting-started.html)
+##Abstract
+In this post we analyze how to install torch, lua and luarocks. The document is extracted from [getting started with Torch](http://torch.ch/docs/getting-started.html)
 
 ## Installing Torch
 
