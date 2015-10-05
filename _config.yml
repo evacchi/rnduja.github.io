@@ -5,9 +5,9 @@ email: fabiofumarola@gmail.com
 description: "a group of people that like spicy nduja"
 baseurl: ""
 url: ""
-twitter_username: @rnduja
+twitter_username: rnduja
 github_username:  rnduja
-facebook_username:  rnduja
+facebook_username: rnduja
 
 # Build settings
 #markdown: kramdown
