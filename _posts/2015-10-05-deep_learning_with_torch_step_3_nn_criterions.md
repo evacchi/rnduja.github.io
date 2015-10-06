@@ -132,4 +132,4 @@ print('prediction for x2 = ' .. model:forward(x2)[1] .. ' expected value ' .. y2
 print('loss after training for x1 = ' .. criterion:forward(model:forward(x1), y1))
 print('loss after training for x2 = ' .. criterion:forward(model:forward(x2), y2))
 ```
-The examples is available and runnable from the [example folder]*https://github.com/rnduja/torch-examples/blob/master/3_example_simple_nn.lua).
+The examples is available and runnable from the [example folder](https://github.com/rnduja/torch-examples/blob/master/3_example_simple_nn.lua).
