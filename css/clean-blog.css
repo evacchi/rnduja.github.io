@@ -1,6 +1,12 @@
+/*!
+ * Clean Blog v1.0.0 (http://startbootstrap.com)
+ * Copyright 2015 Start Bootstrap
+ * Licensed under Apache 2.0 (https://github.com/IronSummitMedia/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
 body {
   font-family: 'Lora', 'Times New Roman', serif;
-  font-size: 16px;
+  font-size: 20px;
   color: #404040;
 }
 p {
@@ -47,6 +53,7 @@ hr.small {
   left: 0;
   width: 100%;
   z-index: 3;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5), 0px 0px 1px rgba(0, 0, 0, 0.5);
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .navbar-custom .navbar-brand {
@@ -129,13 +136,13 @@ hr.small {
 }
 .intro-header {
   background: no-repeat center center;
-  /*background-color: #808080;*/
-  background-color: #3A0B0B;
+  background-color: #808080;
   background-attachment: scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5), 0px 0px 1px rgba(0, 0, 0, 0.5);
   margin-bottom: 50px;
 }
 .intro-header .site-heading,
@@ -163,8 +170,8 @@ hr.small {
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
   font-size: 24px;
-  line-height: 1.1;
-  display: block;
+  line-height: 1.1,
+			display: block;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
   margin: 10px 0 0;
