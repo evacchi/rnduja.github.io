@@ -2,7 +2,7 @@
 layout:     post
 title:      "Deep Learning with Torch: 4"
 subtitle:   "An alternative library to build complex neural networks"
-date:       2015-10-06 12:00:00
+date:       2015-10-07 12:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post.jpg"
 ---
