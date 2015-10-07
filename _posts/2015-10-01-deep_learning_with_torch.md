@@ -4,7 +4,7 @@ title:      "Deep Learning with Torch"
 subtitle:   "The Long way of Deep Learning with Torch"
 date:       2015-10-01 12:00:00
 author:     "Fabio Fumarola"
-header-img: "img/rnduja.png"
+header-img: "img/post.jpg"
 ---
 
 ## Deep Learning with Torch

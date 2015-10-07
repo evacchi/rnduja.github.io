@@ -4,7 +4,7 @@ title:      "Deep Learning with Torch: 3"
 subtitle:   "Using Criterions to build complex neural networks"
 date:       2015-10-05 12:00:00
 author:     "Fabio Fumarola"
-header-img: "img/rnduja.png2"
+header-img: "img/post.jpg"
 ---
 
 
