@@ -4,7 +4,7 @@ title:      "Deep Learning with Torch: 0"
 subtitle:   "How to setup Torch"
 date:       2015-10-02 12:00:00
 author:     "Fabio Fumarola"
-header-img: "img/rnduja.png"
+header-img: "img/post.jpg"
 ---
 
 
