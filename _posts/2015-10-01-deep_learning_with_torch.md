@@ -27,6 +27,10 @@ If you're looking for a technical introduction to deep architectures, I recommen
 - this review paper by Yoshua Bengio: [Page on iro.umontreal.ca](http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf), and
 - the website [Deep Learning](http://deeplearning.net/).
 
+## Definition of Deep Learning
+
+As defined in Bengio et al. [Representation Learning: A Review and New
+Perspectives](http://arxiv.org/pdf/1206.5538v3.pdf), deep Learning can be defined as constructing multiple levels of representation or learning a hierarchy of features.
 
 ## The Long way of Deep Learning with Torch
 
