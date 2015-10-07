@@ -12,4 +12,8 @@ This is the iScala notebook for the talk I presented at the [Scala Italy](http:/
 
 <iframe src="https://player.vimeo.com/video/131975223" width="500" height="268" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/131975223">Scala Italy 2015: Andrea Ferretti - Dependent types in Scala</a> from <a href="https://vimeo.com/user41133250">Scala Italy</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
-<iframe src="http://nbviewer.ipython.org/github/scala-italy/2015/blob/master/05a-andrea_ferretti-type-level-hackery/05a-andrea_ferretti-type-level-hackery.ipynb"></iframe> 
+<p>
+  <a href="/files/type-level-hackery.ipynb"> download notebook</a>
+</p>
+
+<iframe width="100%" height="500px" frameborder="0" src="http://nbviewer.ipython.org/github/scala-italy/2015/blob/master/05a-andrea_ferretti-type-level-hackery/05a-andrea_ferretti-type-level-hackery.ipynb"></iframe>
