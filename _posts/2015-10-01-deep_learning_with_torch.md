@@ -43,5 +43,5 @@ Here it is the list of arguments faced:
 - [Eval and Early Stop]()
 - [Cuda and OpenCL]()
 - [Plotting]()
-- Convolutional]()
+- [Convolutional]()
 - [Other Models]()
