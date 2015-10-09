@@ -42,7 +42,7 @@ Here it is the list of arguments faced:
 - [NN Criterions](/2015/10/05/deep_learning_with_torch_step_3_nn_criterions/)
 - [NN Graph](/2015/10/07/deep_learning_with_torch_step_4_nngraph/)
 
-Next Posts every Monday
+Next Posts, every Monday
 
 - [RNN and LSTM]()
 - [Dropout]()
