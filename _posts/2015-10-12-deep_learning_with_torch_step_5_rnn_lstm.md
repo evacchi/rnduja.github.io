@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Deep Learning with Torch: 5"
-subtitle:   "train a RNN and a LSTM using torch rnn"
+subtitle:   "Training RNNs and LSTMs using torch rnn"
 date:       2015-10-12 10:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post.jpg"
