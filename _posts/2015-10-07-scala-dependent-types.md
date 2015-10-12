@@ -1,6 +1,7 @@
 ---
 layout:     post
 title:      "Dependent types in Scala"
+subtitle:   "Hacking on the type level"
 date:       2015-10-07 12:00:00
 author:     "Andrea Ferretti"
 header-img: "img/2015-10-07-scala-dependent-types/cover1.jpg"
