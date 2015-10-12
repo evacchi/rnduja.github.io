@@ -26,7 +26,6 @@ rnn = nn.AbstractRecurrent(rho)
 This class takes as parameter:
 
 - `rho`, that is the maximum number of steps to backpropagate through time (BPTT). The default value for `rho` is 9999 and means that the effect of the network is backpropagated through the entire sequence whatever its length.
-
 	>Lower values of `rho` are useful when you have long sequences and you want to propagate only at least rho steps.
 	>This is not valid for LSTM where the model learn when remember/forget.
 
@@ -49,7 +48,6 @@ Moreover, it accepts as input a table of examples. **Thus, it can be trained usi
 The transfer function and the merge function can be passed optionally.
 
 A **forward** keeps a log of intermediate steps and increase the step 1 by 1. Back propagation through time is performed when `updateParameters` or `backwardThroughTime` method is called.  Note that the longer the sequence the more memory will be required to store all the output and gradInput states (one for each time step).
-
 >**Suggestion**: To use this module with batches, we suggest using different sequences of the same size within a batch and calling updateParameters every rho steps and forget at the end of the Sequence.
 
 
@@ -92,6 +90,7 @@ end
 ```
 
 Checks the complete examples for:
+
 - [classification task](https://github.com/rnduja/torch-examples/blob/master/5_example_rnn_class.lua)
 - [regression task](https://github.com/rnduja/torch-examples/blob/master/5_example_rnn_regr.lua)
 
