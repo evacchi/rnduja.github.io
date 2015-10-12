@@ -5,6 +5,7 @@ subtitle:   "Understand torch module class"
 date:       2015-10-03 12:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post.jpg"
+comments: true
 ---
 
 ##Abstract

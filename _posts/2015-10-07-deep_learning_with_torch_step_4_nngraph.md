@@ -5,6 +5,7 @@ subtitle:   "An alternative library to build complex neural networks"
 date:       2015-10-07 12:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post.jpg"
+comments: true
 ---
 
 ## Abstract

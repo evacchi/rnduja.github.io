@@ -5,6 +5,7 @@ subtitle:   "How to setup Torch"
 date:       2015-10-02 12:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post.jpg"
+comments: true
 ---
 
 

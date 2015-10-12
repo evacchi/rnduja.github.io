@@ -5,6 +5,7 @@ subtitle:   "train a RNN and a LSTM using torch rnn"
 date:       2015-10-12 10:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post.jpg"
+comments: true
 ---
 
 

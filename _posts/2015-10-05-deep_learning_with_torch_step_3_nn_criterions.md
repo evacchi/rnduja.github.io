@@ -5,6 +5,7 @@ subtitle:   "Using Criterions to build complex neural networks"
 date:       2015-10-05 12:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post.jpg"
+comments: true
 ---
 
 
