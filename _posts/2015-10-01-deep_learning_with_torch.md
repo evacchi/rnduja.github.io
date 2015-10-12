@@ -36,12 +36,12 @@ Perspectives](http://arxiv.org/pdf/1206.5538v3.pdf), deep Learning can be define
 
 Here it is the list of arguments faced:
 
-- [initial setup](/2015/10/02/deep_learning_with_torch_step_0_setup/#disqus_thread)
-- [NN Modules](/2015/10/03/deep_learning_with_torch_step_1_nn_module/#disqus_thread)
-- [NN Containers](/2015/10/04/deep_learning_with_torch_step_2_nn_containers/#disqus_thread)
-- [NN Criterions](/2015/10/05/deep_learning_with_torch_step_3_nn_criterions/#disqus_thread)
-- [NN Graph](/2015/10/07/deep_learning_with_torch_step_4_nngraph/#disqus_thread)
-- [RNN and LSTM](/2015/10/12/deep_learning_with_torch_step_5_rnn_lstm/#disqus_thread)
+- [initial setup](/2015/10/02/deep_learning_with_torch_step_0_setup/)
+- [NN Modules](/2015/10/03/deep_learning_with_torch_step_1_nn_module/)
+- [NN Containers](/2015/10/04/deep_learning_with_torch_step_2_nn_containers/)
+- [NN Criterions](/2015/10/05/deep_learning_with_torch_step_3_nn_criterions/)
+- [NN Graph](/2015/10/07/deep_learning_with_torch_step_4_nngraph/)
+- [RNN and LSTM](/2015/10/12/deep_learning_with_torch_step_5_rnn_lstm/)
 
 Next Posts, every Monday
 
