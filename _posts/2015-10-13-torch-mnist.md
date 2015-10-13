@@ -7,7 +7,7 @@ author:     "Andrea Ferretti"
 header-img: "img/2015-10-13-torch-mnist/cover.jpg"
 ---
 
-If you have followed [Fabio's posts](/2015-10-01-deep_learning_with_torch) up until now, you should be familiar with the basic blocks of a Torch application.
+If you have followed [Fabio's posts](/2015/10/01/deep_learning_with_torch) up until now, you should be familiar with the basic blocks of a Torch application.
 
 In this [iTorch](https://github.com/facebook/iTorch) notebook, we will see a simple but complete example of neural network for the classification problem of recognizing handwritten digits. We use the standard [MNIST](http://yann.lecun.com/exdb/mnist/) dataset, which consists of 60000 grayscale images of size 28x28. We will build a recognizer as a neural network with an input of 28x28=764 neurons and an output of 10 numbers representing the (log-)probabilities that we assign to the 10 digits.
 

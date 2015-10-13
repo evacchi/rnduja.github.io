@@ -8,7 +8,7 @@ header-img: "img/2015-10-07-scala-dependent-types/cover1.jpg"
 comments: true
 ---
 
-This is the iScala notebook for the talk I presented at the [Scala Italy](http://www.scala-italy.it/) conference.
+This is the [iScala](https://github.com/mattpap/IScala) notebook for the talk I presented at the [Scala Italy](http://www.scala-italy.it/) conference.
 
 **Abstract.** An exploration of type level computations. First, I would introduce a few standard techniques to summon implicit instances for a given type, or detect type equality. Then, I would show how to use the type system to encode values and computations, with the examples of booleans and Peano naturals. Finally, the main goal of the talk would be to show how these type level encodings allow Scala to partially simulate some typical constructions of dependently-typed languages, such as fixed-size sequences, modular arithmetic and balanced trees. Many of these constructions have been explored before, and good references are the blog post series by Mark Harrah on type-level programming and the library Shapeless by Miles Sabin. The whole presentation is meant to be done inside an interactive iScala notebook, which can then be distributed to participants.
 
