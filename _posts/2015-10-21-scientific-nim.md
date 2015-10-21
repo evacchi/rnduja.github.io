@@ -54,6 +54,29 @@ be able to ensure that this happens all the time without worrying
 about whether the runtime is doing what we wanted to do in the first
 place.
 
+There are a lot of projects - both for the JVM and specific for Scala -
+that try to do one of the following:
+
+* remove function calls overhead
+* remove overhead and simplify the interaction with native libraries
+* allow a predictable memory layout (for instance, arrays of contiguous objects)
+* decrease the pressure on the GC, by avoiding heap memory allocations
+
+[I](http://openjdk.java.net/jeps/169)
+[will](https://github.com/tiarkrompf/scala-virtualized/wiki)
+[just](https://github.com/densh/scala-offheap)
+[mention](https://github.com/xerial/larray)
+[a](http://scala-miniboxing.org/)
+[few](http://www.mapdb.org/benchmarks.html)
+[of](http://trove.starlight-systems.com/)
+[these](https://github.com/bytedeco/javacpp)
+[efforts](http://openjdk.java.net/projects/panama/)
+
+Eventually, the JVM will get value types and other goodies that simplify the
+interaction with native libraries, or Scala will get a native backend. But in
+the meantime, I would rather look elsewhere when I need to do some heavy
+computations.
+
 Outside the JVM
 ---------------
 
