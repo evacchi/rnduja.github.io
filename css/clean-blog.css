@@ -25,17 +25,76 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 800;
 }
+
+h1 a, h2 a, h3 a, h4 a, .sidebar a, .sidebar .sections button {
+  text-decoration: none;
+  color: #333;
+}
+
+/**********************
+ * Links
+ *********************/
 a {
-  color: #404040;
+  color: #ff487a;
+  transition: color .3s ease-in-out;
+	-moz-transition: color .3s ease-in-out;
+  text-decoration: none;
 }
-a:hover,
-a:focus {
-  color: #0085a1;
+
+a:hover {
+  -webkit-animation: zomg 0.5s infinite;
+  -moz-animation: zomg 0.5s infinite;
+  animation: zomg 0.5s infinite;
 }
-a img:hover,
-a img:focus {
-  cursor: zoom-in;
+
+@-webkit-keyframes zomg {
+  0%, 100% { color: #7ccdea; }
+  16%      { color: #0074D9; }
+  32%      { color: #2ECC40; }
+  48%      { color: #FFDC00; }
+  64%      { color: #B10DC9; }
+  80%      { color: #FF4136; }
 }
+@-moz-keyframes zomg {
+  0%, 100% { color: #7ccdea; }
+  16%      { color: #0074D9; }
+  32%      { color: #2ECC40; }
+  48%      { color: #FFDC00; }
+  64%      { color: #B10DC9; }
+  80%      { color: #FF4136; }
+}
+@keyframes zomg {
+  0%, 100% { color: #7ccdea; }
+  16%      { color: #0074D9; }
+  32%      { color: #2ECC40; }
+  48%      { color: #FFDC00; }
+  64%      { color: #B10DC9; }
+  80%      { color: #FF4136; }
+}
+
+@-webkit-keyframes avatarzomg {
+  0%, 100% { -webkit-filter: invert(0) saturate(100%) hue-rotate(0deg); }
+  25%      { -webkit-filter: invert(10%) saturate(500%) hue-rotate(180deg); }
+  50%      { -webkit-filter: invert(10%) saturate(300%) hue-rotate(300deg); }
+  75%      { -webkit-filter: invert(10%) saturate(500%) hue-rotate(90deg); }
+}
+@-moz-keyframes avatarzomg {
+  0%, 100% { filter: invert(0) saturate(100%) hue-rotate(0deg); }
+  25%      { filter: invert(10%) saturate(500%) hue-rotate(180deg); }
+  50%      { filter: invert(10%) saturate(300%) hue-rotate(300deg); }
+  75%      { filter: invert(10%) saturate(500%) hue-rotate(90deg); }
+}
+@keyframes avatarzomg {
+  0%, 100% { -webkit-filter: invert(0) saturate(100%) hue-rotate(0deg);
+  	             filter: invert(0) saturate(100%) hue-rotate(0deg); }
+  25%      { -webkit-filter: invert(10%) saturate(500%) hue-rotate(180deg);
+  	             filter: invert(10%) saturate(500%) hue-rotate(180deg);}
+  50%      { -webkit-filter: invert(10%) saturate(300%) hue-rotate(300deg);
+  		     filter: invert(10%) saturate(300%) hue-rotate(300deg); }
+  75%      { -webkit-filter: invert(10%) saturate(500%) hue-rotate(90deg);
+                     filter: invert(10%) saturate(500%) hue-rotate(90deg);}
+}
+
 blockquote {
   color: #808080;
   font-style: italic;
