@@ -4,7 +4,7 @@ title:      "Deep Learning with Torch: 7"
 subtitle:   "Using Optim"
 date:       2015-10-26 14:00:00
 author:     "Fabio Fumarola"
-header-img: "img/post.jpg"
+header-img: "img/2015-10-26-deep_learning_with_torch_step_7_optim/cover.jpg"
 comments: true
 ---
 
