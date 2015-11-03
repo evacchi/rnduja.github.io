@@ -44,10 +44,10 @@ Here it is the list of arguments faced:
 - [RNN and LSTM](/2015/10/12/deep_learning_with_torch_step_5_rnn_lstm/)
 - [Dropout](/2015/10/20/deep_learning_with_torch_step_6_dropout/)
 - [Optim](/2015/10/26/deep_learning_with_torch_step_7_optim/)
+- [Eval and Early Stop](/2015/11/03/deep_learning_with_torch_step_8_early_stop/)
 
 Next Posts, every Monday
 
-- [Eval and Early Stop]()
 - [Cuda and OpenCL]()
 - [Plotting]()
 - [Convolutional]()
