@@ -11,7 +11,7 @@ comments: true
 
 
 ## Abstract:
-**Abstract:** In this post we analyze how to implement **Dropout**
+In this post we analyze how to implement **Dropout**
 
 
 --------
