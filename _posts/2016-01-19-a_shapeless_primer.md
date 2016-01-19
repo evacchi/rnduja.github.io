@@ -5,9 +5,12 @@ subtitle:   "A Shapeless Primer"
 date:       2016-01-19 12:00:00
 author:     "Edoardo Vacchi"
 header-img: "/farm3.staticflickr.com/2651/4178226353_0e1c6aba64_o.jpg"
+comments: true
 ---
 
-([photo by Sergiu Bacioiu](https://www.flickr.com/photos/sergiu_bacioiu/4178226353/in/faves-7926487@N06/))
+<div style="text-align:right; font-size:x-small">
+<a href="https://www.flickr.com/photos/sergiu_bacioiu/4178226353/in/faves-7926487@N06/">photo by Sergiu Bacioiu</a>
+</div>
 
 Shapeless is a Scala library for [generic programming](https://en.wikipedia.org/wiki/Generic_programming). The name “Shapeless” comes from a famous Bruce Lee quote:
 
