@@ -868,13 +868,13 @@ We may define a `can_apply_product(P,F,L,R)` predicate as follows:
 	fn_to_product(F, fn(L, R)):
 	```
 
-	in fact, we decided to represent any `T => R` function type using `fn(T,R)`.
-	The `fn_to_product` predicate shall hold when
+ in fact, we decided to represent any `T => R` function type using `fn(T,R)`.
+ The `fn_to_product` predicate shall hold when
 
-    1. `F` is a function
-	  2. the tuple of the types of the arguments of F can be converted into a (h)list
+  1. `F` is a function
+	2. the tuple of the types of the arguments of F can be converted into a (h)list
 
-	This can be written as follows:
+ This can be written as follows:
 
 	```prolog
 	fn_to_product(F, fn(L, R)) :-
@@ -882,7 +882,7 @@ We may define a `can_apply_product(P,F,L,R)` predicate as follows:
 	    generic(Args, L).    
 	```
 
-	or, in short:
+ or, in short:
 
 	```prolog
 	fn_to_product(fn(Args,R), L, R) :-
