@@ -247,7 +247,7 @@ those arguments into one single product-type argument.
 Scala provides `f.tupled` which turns a K-ary function into a unary function of one K-tuple argument. For instance:
 
 ```scala
-def f = (s: String, i: Int) => s"$s $i"
+val f = (s: String, i: Int) => s"$s $i"
 val ft: Tuple2[String, Int] => String = f.tupled
 ```
 
@@ -850,7 +850,7 @@ We may define a `can_apply_product(P,F,L,R)` predicate as follows:
 	```prolog
 	generic(P, L) :-
 	    product(P),
-		(X, Y) = T,  % deconstruct T into X and Y (the correct term is «unify»)
+		(X, Y) = P,  % deconstruct P into X and Y (the correct term is «unify»)
 		hlist(L),
 		[X, Y] = L.  % deconstruct L into X and Y
 	```
