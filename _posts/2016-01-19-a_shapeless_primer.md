@@ -247,7 +247,7 @@ those arguments into one single product-type argument.
 Scala provides `f.tupled` which turns a K-ary function into a unary function of one K-tuple argument. For instance:
 
 ```scala
-def f(s: String, i: Int): String => s"$s $i"
+def f = (s: String, i: Int) => s"$s $i"
 val ft: Tuple2[String, Int] => String = f.tupled
 ```
 
