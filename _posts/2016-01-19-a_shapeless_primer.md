@@ -23,7 +23,7 @@ devoted to explaining the very basics of Shapeless, but, in my opinion, fewer po
 how to truly *understand* how to *use* Shapeless. In this post I am trying to give an overview,
 starting from a concrete situation. Hopefully, in the end, you will
 have a better picture of how to read a piece of code that makes extensive use
-of a Shapeless and Shapeless-like coding-style.
+of Shapeless and a Shapeless-like coding-style.
 
 
 
