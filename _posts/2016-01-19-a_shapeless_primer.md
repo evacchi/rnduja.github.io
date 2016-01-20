@@ -4,7 +4,7 @@ title:      "Be Like Water"
 subtitle:   "A Shapeless Primer"
 date:       2016-01-19 12:00:00
 author:     "Edoardo Vacchi"
-header-img: "/farm3.staticflickr.com/2651/4178226353_0e1c6aba64_o.jpg"
+header-img: "img/2016-01-19-a_shapeless_primer/water-drop.jpg"
 comments: true
 ---
 
