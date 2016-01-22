@@ -12,6 +12,7 @@ comments: true
 <a href="https://www.flickr.com/photos/sergiu_bacioiu/4178226353/in/faves-7926487@N06/">photo by Sergiu Bacioiu</a>
 </div>
 
+
 Shapeless is a Scala library for [generic programming](https://en.wikipedia.org/wiki/Generic_programming). The name “Shapeless” comes from a famous Bruce Lee quote:
 
 > Don't get set into one form, adapt it and build your own, and let it grow, be like water. Empty your mind, be formless, **shapeless** — like water. Now you put water in a cup, it becomes the cup; You put water into a bottle it becomes the bottle; You put it in a teapot it becomes the teapot. Now water can flow or it can crash. Be water, my friend.
@@ -26,6 +27,29 @@ have a better picture of how to read a piece of code that makes extensive use
 of Shapeless and a Shapeless-like coding-style.
 
 
+<div><h4>Table of Contents</h4>
+<div id="toc">
+
+  <ul>
+<li><a href="#running-example-stream-processing">Running Example: Stream Processing</a>
+</li><li><a href="#abstracting-over-arity">Abstracting over Arity</a>
+</li><li><a href="#hlists-and-product-types">HLists and Product Types</a>
+</li><li><a href="#from-tuples-to-hlists-and-back-again">From Tuples to HLists and Back Again</a>
+</li><li><a href="#the-generic-t-object">The <code>Generic[T]</code> object</a>
+</li><li><a href="#the-fntoproduct-f-object">The <code>FnToProduct[F]</code> object</a>
+</li><li><a href="#implicit-value-resolution">Implicit Value Resolution</a>
+<ul><li><a href="#a-short-prolog-digression">A Short Prolog Digression</a>
+</li><li><a href="#grandchild-in-scala">GrandChild In Scala</a>
+<li><a href="#final-remarks">Final Remarks</a>
+</ul>
+</li><li><a href="#understanding-applyproduct-evidences-and-typeclasses">Understanding <code>applyProduct</code>: evidences and typeclasses</a>
+<ul><li><a href="#the-aux-pattern">The Aux Pattern</a>
+</li><li><a href="#bonus-applyproduct-encoding-in-prolog">Bonus: <code>applyProduct</code> encoding in Prolog</a>
+</li></ul></li><li><a href="#conclusions-and-references">Conclusions and References</a>
+</li></ul>
+
+</div>
+</div>
 
 ## Running Example: Stream Processing
 
@@ -599,7 +623,7 @@ In fact,
 * **implicit parameter lists** are bodies of a rule
 
 
-#### Final Remarks
+### Final Remarks
 
 Please recall that in Prolog we could even write
 

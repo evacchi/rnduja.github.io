@@ -14,6 +14,6 @@ facebook_username: rnduja
 permalink: pretty
 markdown: redcarpet
 redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
 paginate: 5
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
