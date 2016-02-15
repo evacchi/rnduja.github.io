@@ -8,9 +8,9 @@ header-img: "img/2016-01-19-a_shapeless_primer/water-drop.jpg"
 comments: true
 ---
 
-<div style="text-align:right; font-size:x-small">
+<!-- <div style="text-align:right; font-size:x-small">
 <a href="https://www.flickr.com/photos/sergiu_bacioiu/4178226353/in/faves-7926487@N06/">photo by Sergiu Bacioiu</a>
-</div>
+</div> -->
 
 
 Shapeless is a Scala library for [generic programming](https://en.wikipedia.org/wiki/Generic_programming). The name “Shapeless” comes from a famous Bruce Lee quote:
@@ -27,29 +27,26 @@ have a better picture of how to read a piece of code that makes extensive use
 of Shapeless and a Shapeless-like coding-style.
 
 
-<div><h4>Table of Contents</h4>
-<div id="toc">
+#### Table of Contents
 
-  <ul>
-<li><a href="#running-example-stream-processing">Running Example: Stream Processing</a>
-</li><li><a href="#abstracting-over-arity">Abstracting over Arity</a>
-</li><li><a href="#hlists-and-product-types">HLists and Product Types</a>
-</li><li><a href="#from-tuples-to-hlists-and-back-again">From Tuples to HLists and Back Again</a>
-</li><li><a href="#the-generic-t-object">The <code>Generic[T]</code> object</a>
-</li><li><a href="#the-fntoproduct-f-object">The <code>FnToProduct[F]</code> object</a>
-</li><li><a href="#implicit-value-resolution">Implicit Value Resolution</a>
-<ul><li><a href="#a-short-prolog-digression">A Short Prolog Digression</a>
-</li><li><a href="#grandchild-in-scala">GrandChild In Scala</a>
-<li><a href="#final-remarks">Final Remarks</a>
-</ul>
-</li><li><a href="#understanding-applyproduct-evidences-and-typeclasses">Understanding <code>applyProduct</code>: evidences and typeclasses</a>
-<ul><li><a href="#the-aux-pattern">The Aux Pattern</a>
-</li><li><a href="#bonus-applyproduct-encoding-in-prolog">Bonus: <code>applyProduct</code> encoding in Prolog</a>
-</li></ul></li><li><a href="#conclusions-and-references">Conclusions and References</a>
-</li></ul>
 
-</div>
-</div>
+- [Running Example: Stream Processing](#running-example-stream-processing)
+- [Abstracting over Arity](#abstracting-over-arity)
+- [HLists and Product Types](#hlists-and-product-types)
+- [From Tuples to HLists and Back Again](#from-tuples-to-hlists-and-back-again)
+- [The `Generic[T]` object](#the-generic-t-object)
+- [The `FnToProduct[F]` object](#the-fntoproduct-f-object)
+- [Implicit Value Resolution](#implicit-value-resolution)
+- [A Short Prolog Digression](a-short-prolog-digression)
+- [GrandChild In Scala](#grandchild-in-scala)
+- [Final Remarks](#final-remarks)
+
+- [Understanding `applyProduct` evidences and typeclasses](#understanding-applyproduct-evidences-and-typeclasses)
+- [The Aux Pattern](#the-aux-pattern)
+- [Bonus: `applyProduct` encoding in Prolog](#bonus-applyproduct-encoding-in-prolog)
+
+- [Conclusions and Reference](#conclusions-and-references)
+
 
 ## Running Example: Stream Processing
 
@@ -66,9 +63,9 @@ The initial and final nodes are an exception:
 
 Beside the initial and final nodes, which can be special-cased, the node of a pipeline may be generally described by the case class:
 
-```scala
+~~~scala
 case class Node[T, R](f: T => R)
-```
+~~~
 
 But, in a stream processing framework, the more interesting case is that of *flow-graph*
 rather than that of a simple pipeline. In this case, each node would compute a function
@@ -76,21 +73,21 @@ of `N>=1` parameters, where each parameter would be an in-edge into the node.
 In pseudo-code:
 
 
-```scala
+~~~scala
 case class Node[T1, T2, ..., TK, R](f: (T1, T2, ..., TK) => R)
-```
+~~~
 
 The challenge now would be supporting K-ary function with arbitrary K, without writing K
 different implementations. As you may know, tuples and functions in Scala
 are implemented by explicitly defining 22 variants, with
 up to 22 distinct type parameters, like so:
 
-```scala
+~~~scala
 Function1[T,R]                   
 Function2[T1,T2,R]              Tuple2[T1,T2]
 ...                             ...
 Function22[T1,T2,...,T22,R]     Tuple22[T1,T2,...,T22]
-```
+~~~
 
 The limit is known to be somewhat arbitrary, but we are not debating
 this now. The point is, although the code for this could be
@@ -113,7 +110,7 @@ The [Shapeless wiki](https://github.com/milessabin/shapeless/wiki/Feature-overvi
 
 The following incantation does the trick:
 
-```scala
+~~~scala
 import syntax.std.function._
 import ops.function._
 
@@ -126,7 +123,7 @@ res0: Int = 3
 
 scala> applyProduct(1, 2, 3)((_: Int)*(_: Int)*(_: Int))
 res1: Int = 6
-```
+~~~
 
 Now, we *may* copy and paste the piece of code above and call it a day.
 Instead, this entire post is devoted to achieve a more deep understanding of this short, but very dense snippet. First of all, let us rule out the **type parameters**. What is an HList?
@@ -140,17 +137,17 @@ I want to refer you to the many posts that describe how HLists can be implemente
 
 HLists (short for *Heterogeneous List*) are lists of objects of arbitrary types, where the type information for each object is kept. In fact, in Scala, we may do:
 
-```scala
+~~~scala
 val l = 10 :: "string" :: 1.0 :: Nil
-```
+~~~
 
 but the type of `l` then would be `List[Any]`, because the common super type of the elements there would be, in fact, only `Any`.
 A `HList` is declared similarly to a `List`:
 
 
-```scala
+~~~scala
 val hl = 10 :: "string" :: 1.0 :: HNil
-```
+~~~
 
 except for the terminator `HNil`. But the type of `hl` is actually `Int :: String :: Double :: HNil`.
 As you can see, no type information is lost.
@@ -167,7 +164,7 @@ You already know that Scala tuples are a first-class concept; tuples are constru
 
 The benefit of using `HLists` instead of tuples is that they can be used in all those situations where a tuple would work just as well, **but** *without* the 22-elements limit.
 
-```scala
+~~~scala
 val t  = (1,   "String",   2.0)
 val hl =  1 :: "String" :: 2.0 :: HNil
 
@@ -181,18 +178,18 @@ t match {
 hl match {
   case 1 :: s :: _ :: HNil => ...
 }
-```
+~~~
 
 Moreover, Shapeless `HLists` provide many of the operations that can be usually applied to `Lists` such as `map`, `flatMap` etc. But, as a simple substitute for tuples, HLists are already quite valuable; for instance, it is not necessary to know the size of an HList before being able to match against it, rendering possible to do things like:
 
-```scala
+~~~scala
 hl match {
   case 1 :: rest => ... // matches if first element 1, regardless the size of the list
                         // and binds the tail to `rest`
   case x :: y :: HNil => ... // matches when it is a pair
   // etc.                      
 }
-```
+~~~
 
 
 ## From Tuples to HLists and Back Again
@@ -203,36 +200,36 @@ to go back and forth between them.
 
 The way we go **from HLists to Tuples** is through the `tupled` method.
 
-```scala
+~~~scala
 val hl  = 1 :: "String" :: 2.0 :: HNil
 val  t  = hl.tupled
-```
+~~~
 
 The way we go **from Tuples to HLists** is through the `productElements` method.
 In fact, if `hl` is the HList, and `t` is the equivalent tuple, then it is always true that:
 
-```scala
+~~~scala
 hl == t.productElements
-```
+~~~
 
 Of course, a simple consequence is that you are able to abstract over the arity of **tuples** by *transforming them into HLists*
 
-```scala
+~~~scala
 aTuple.productElements match {
   case a :: b :: HNil => ...
 }
-```
+~~~
 
 Whatsmore, because all tuples implement the `Product` trait
 and **case classes** implement the `Product` trait, many of the operations
 working for tuples also work for case classes.
 
-```scala
+~~~scala
 case class Person(name: String, age: Int)
 Person("John", 40).productElements match {
   case name :: age :: HNil => ...
 }
-```
+~~~
 
 It is even possible to create instances of a case class from an HList.
 Let us see how.
@@ -241,25 +238,25 @@ Let us see how.
 
 A `Generic[T]` object implements the methods `to(T)` and `from(HList)` for a given product type `T` (usually, a case class or a tuple). For instance, the `Generic` object to convert back and forth between a `Person` and an `HList` is created and used as follows:
 
-```scala
+~~~scala
 val gp = Generic[Person]
 val john = Person("John", 40)
 val hl: String :: Int :: HNil = gp.to(john)
 val p: Person = gp.from(hl)
 
 assert( john == p )
-```
+~~~
 
 This is likewise true for tuples.
 
-```scala
+~~~scala
 val gp = Generic[Tuple2[String,Int]]
 val johnTuple = ("John", 40)
 val hl: String :: Int :: HNil = gp.to(johnTuple)
 val tp: Tuple2[String,Int] = gp.from(hl)
 
 assert( johnTuple == tp )
-```
+~~~
 
 In fact, the `t.productElements` method is really short-hand syntax for the code snippet above.
 
@@ -270,41 +267,41 @@ those arguments into one single product-type argument.
 
 Scala provides `f.tupled` which turns a K-ary function into a unary function of one K-tuple argument. For instance:
 
-```scala
+~~~scala
 val f = (s: String, i: Int) => s"$s $i"
 val ft: Tuple2[String, Int] => String = f.tupled
-```
+~~~
 
 But then, again, as we have seen already, you are not really able to *abstract* over the arity of Scala tuples. However, we can import `FnToProduct[F]` to turn a K-ary function into a function of K-sized HList of the same argument types.
 
-```scala
+~~~scala
 import ops.function._
 val fp = FnToProduct[(String, Int) => String]
 val fhl: String::Int::HNil => String = fp.apply(f) // or, equivalently, fp(f)
-```
+~~~
 in fact, there is even syntactic sugar for this:
 
-```scala
+~~~scala
 import syntax.std.function._
 val fhl: String::Int::HNil => String = f.toProduct
-```
+~~~
 
 So now we have already sufficient elements to understand the following line of the Shapeless wiki.
 
-```scala
+~~~scala
 f.toProduct(gen.to(p)) // could have been written as f.toProduct.apply(gen.to(p))
-```
+~~~
 
 First of all, let us consider a special case;
 imagine `f` is the function we have just defined above, and let `p = Person("John", 40)`.
 Now, the line above is a bit terse. Let us expand it a little bit:
 
-```scala
+~~~scala
 val gen = Generic[Person]
 val fhl: String :: Int :: HNil => String = f.toProduct
 val hl: String :: Int :: HNil = gen.to(p)
 fhl(hl)
-```
+~~~
  - we get `gen`, a `Generic[Person]` instance
  - we convert `f` to an HList-accepting function (`f.toProduct`);
  - we convert `p` to the HList `hl`  by applying the `to(Person)` method of `gen`
@@ -326,12 +323,12 @@ are automatically inserted as required by the compiler.
 When one such *implicit value* is in scope, then the implicit arguments
 can be completely omitted by who is writing the code. For instance:
 
-```scala
+~~~scala
 implicit val implicitJohn = Person("John", 40)
 def somePersonString(implicit p: Person) = p.toString
 
 somePersonString // returns "Person(John, 40)"
-```
+~~~
 
 
 Implicits can be brought into scope by explicitly declaring them, as in the example
@@ -350,12 +347,12 @@ to see if a matching value can be *generated* on-the-fly.
 
 For instance, consider this example:
 
-```scala
+~~~scala
 implicit def personProvider = Person("Random Guy", (math.random * 100).toInt)
 def somePersonString(implicit p: Person) = p.toString
 
 > somePersonString // Person("Random Guy", and a random integer between 0 and 100)
-```
+~~~
 
 
 Let me repeat this once again: implicit parameter **resolution** is a compile-time
@@ -367,7 +364,7 @@ at optimizing out final classes, singletons and the like,
 but be advised that a matching implicit def is code that
 *will actually execute* at run time!
 
-```scala
+~~~scala
 implicit def aSlowPersonProvider = {
 	Thread.sleep(3000) // faking a slow computation here
 	Person("Random Guy", (math.random * 100).toInt)
@@ -375,7 +372,7 @@ implicit def aSlowPersonProvider = {
 def somePersonString(implicit p: Person) = p.toString
 
 > somePersonString // sits 3 secs, then returns the Person instance
-```
+~~~
 
 Implicit parameter resolution can be twisted
 to enforce stronger constraints than simple type-checking. Parameterized types
@@ -412,60 +409,60 @@ that are found in the query.
 
 For instance, let us say that John, Carl and Tom are all persons. We do this by writing the Prolog listing:
 
-```prolog
+~~~prolog
 person(john).
 person(carl).
 person(tom).
-```
+~~~
 
 These are all *facts* that we are stating about the atomic values john, carl, and tom (notice that they are all in small-letters; capitals are reserved to variables).
 You can now check whether `john` is a person with the query
 
-```prolog
+~~~prolog
 ?- person(john).
 true
-```
+~~~
 
 You can also get all the persons in the KB:
 
-```prolog
+~~~prolog
 ?- person(X).
-```
+~~~
 
 Where `X` is a *free variable* (Prolog use capitals to denote variables), that is, a *fresh* variable that is not bound to any value.
 In this case we are asking the interpreter to find a *concrete proof* (or *evidence* or *witness*)
 that the condition holds in the KB.  In other words, we want to find *at least* one binding of `X` for which `person(X)` is true;
 By hitting `;` we can request the next binding.
 
-```prolog
+~~~prolog
 ?- person(X).
 X = john ;
 X = carl ;
 X = tom
-```
+~~~
 
 Let us now provide relations; that is K-ary facts about these persons.
 
-```prolog
+~~~prolog
 child(john, carl).
 child(carl, tom).
-```
+~~~
 
 
 we can now instruct Prolog on how to *derive* further relations between these persons using *rules*. For instance, let us define the `grandchild` rule.
 
-```prolog
+~~~prolog
 grandchild(A, B) :-
 	child(A, X),
 	child(X, B).
-```
+~~~
 
 That is, `A` and `B` are in a grandchild relation if `A` is child of some `X`
 and `X` is a child of `B`. A rule describes an implication relation, in fact, this, in logic may be written as:
 
-```
+~~~
 ∃ A, B, X: child(A,X) ∧ child(X,B) → grandchild(A,B)
-```
+~~~
 
 Notice that the implication is written in reverse, compared to the Prolog version.
 The Prolog version results more readable in code, because it makes more
@@ -474,7 +471,7 @@ The interpreter can be queried in a number of ways. Again, small letters
 denote atoms, while capitals indicate free variables, we can choose any combination of the two
 to produce different results.
 
-```prolog
+~~~prolog
 % find the pair(s) X,Y for which the grandchild relation holds
 ?- grandchild(X, Y).
 X = john
@@ -487,30 +484,30 @@ Y = tom
 % find tom's grandparents
 ?- grandchild(X, tom).
 X = john
-```
+~~~
 
 The system will also fail in *impossible* cases, that is, when we try to find
 something that is not derivable in the knowledge base.
 For instance, looking for someone who is his/her own grandchild
 
-```prolog
+~~~prolog
 ?- grandchild(X, X)
 no
-```
+~~~
 
 or looking for someone who is grandchild of tom (who has no grandchildren)
 
-```prolog
+~~~prolog
 ?- grandchild(tom, X)
 no
-```
+~~~
 
 or looking for the granparent of john, which is unknown in this knowledge base
 
-```prolog
+~~~prolog
 ?- grandchild(X, john)
 no
-```
+~~~
 
 ### GrandChild In Scala
 
@@ -526,30 +523,30 @@ Let us see how an implementation of the `grandchild` example may look in Logic S
 First, we have to introduce facts about children. The relation may be declared
 as a parameterized type:
 
-```scala
+~~~scala
 trait Child[A,B] // notice that a class would work as well
-```
+~~~
 
 where A,B will be substituted by atoms. Atoms are, again, types, so we may declare them as follows
 
-```scala
+~~~scala
 trait John
 trait Carl
 trait Tom
-```
+~~~
 
 We can now declare *facts* (remember, this is *Logic Scala*):
 
-```scala
+~~~scala
 fact johncarl = new Child[John,Carl]{} // an instance of type Child
 fact carltom  = new Child[Carl,Tom ]{}
-```
+~~~
 
 The rule for `grandchild` is made of two parts. The type declaration,
 
-```scala
+~~~scala
 trait GrandChild[A,B]
-```
+~~~
 
 and the semantics of the rule, which is given using the `rule` construct.
 Just like in Prolog, our imaginary Scala dialect would describe how to derive
@@ -557,19 +554,19 @@ new instances of the type `GrandChild[A,B]` from facts that are found (or that c
 be derived) in the current knowledge base. A `rule` is written similarly to
 a `def`:
 
-```scala
+~~~scala
 rule grandChild[A,B,X](  
 	facts
 		xy: Child[A,X],
 		yz: Child[X,B]
 	) = new GrandChild[A,B] {}
-```
+~~~
 
 Notice that, because a `rule` declaration is syntactically similar to a `def` declaration, it is written in the same order of the abstract logic declaration, while the Prolog version is written in reverse. However, if we remove the syntactic noise, this is really stating the same:
 
-```scala
+~~~scala
 rule[A,B,X](Child[A,X], Child[X,B]): GrandChild[A,B]
-```
+~~~
 
 that is, for some A, B, X, *if* there exist `Child[A,X]`, `Child[X,B]`, *then*
 a `GrandChild[A,B]` can be derived.
@@ -577,19 +574,19 @@ a `GrandChild[A,B]` can be derived.
 we can now write a query. The query will compile if and only if the
 compiler is able to satisfy the contraints using the facts and the rules in the knowledge base.
 
-```scala
+~~~scala
 
 > query[ GrandChild[John, Tom] ]
 // (compiles; returns the fact instance)
 
 > query[ GrandChild[John, Carl] ]
 Compilation Failed
-```
+~~~
 
 You should now be more convinced that there is a strong correspondence between
 the Logic Scala version and the Prolog version. Truth is, the only difference between Logic Scala and real-world Scala is that we renamed a few keywords. The code and machinery are actually the same!
 
-```scala
+~~~scala
 trait John
 trait Carl
 trait Tom
@@ -610,7 +607,7 @@ implicit def grandChild[X,Y,Z](
 
 > implicitly[ GrandChild[John, Carl] ]
 Compilation Failed
-```
+~~~
 
 
 You should now be convinced that there is a correspondence between the way logic
@@ -627,26 +624,26 @@ In fact,
 
 Please recall that in Prolog we could even write
 
-```prolog
+~~~prolog
 ?- grandchild(john, Y).
-```
+~~~
 
 The query above is asking for *evidence* that there exist a granchild of John in the KB.
 The interpreter would return the `Y` binding for which the condition holds; i.e., `Y=tom`.
 Something similar can be achieved in Scala through *existential types*.
 The query above could be encoded as:
 
-```prolog
+~~~prolog
 > implicitly [ GrandChild[John, Y forSome { type Y }] ]
-```
+~~~
 this encodes *exactly* the same query: find *evidence* (an object instance)
 that there exist `Y` such that `GrandChild[John, Y]` is a valid statement (a concrete type).
 
 This can be also more concisely expressed as:
 
-```prolog
+~~~prolog
 > implicitly [ GrandChild[John, _] ]
-```
+~~~
 
 There are caveats, though.
 
@@ -662,7 +659,7 @@ the implicit parameters in the `def` signature in the order they are defined; th
 the system looks for an implicit instance of `Child[_,Y]`, but this cannot be derived, because `Y` is still
 unknown at that time. In fact, if we define another `implicit def` where the implicit values are re-ordered:
 
-```scala
+~~~scala
 implicit def grandChildReordered[X,Y,Z](
 	implicit
 	    yz: Child[Y,Z],
@@ -675,14 +672,14 @@ implicit def grandChildReordered[X,Y,Z](
 
 > implicitly[ GrandChild[John, _] ]
 // compiles
-```
+~~~
 
 `GrandChild[_,_]` will only work if you explicitly "assert" it:
 
-```scala
+~~~scala
 implicit val fallback: GrandChild[_,_] = new GrandChild[Nothing,Nothing]{}
 > implicitly[ GrandChild[_, _] ]
-```
+~~~
 
 We are now ready to understand how type parameter inference and implicit resolution work in `applyProduct`.
 
@@ -693,13 +690,13 @@ implicit parameters. Because now we have found the parallel between Scala and Pr
 what is happening in the function:
 
 
-```scala
+~~~scala
 def applyProduct[P <: Product, F, L <: HList, R](p: P)(f: F)
   (implicit
   	 gen: Generic.Aux[P, L],
   	 fp: FnToProduct.Aux[F, L => R]
   ) = f.toProduct(gen.to(p))
-```
+~~~
 
 * Let be `P` a `Product`, that is, a tuple or a case class
 * Let be `F` an unconstrained type parameter
@@ -742,20 +739,20 @@ Again, this is a bit technical.
 *type alias* feature. Type aliases are also called *type members* because, just like properties
 and methods, they occur as *members* of another type. For instance, the `Generic[P]` trait:
 
-```scala
+~~~scala
 trait Generic[P] {
   type Out
 }
-```
+~~~
 
 The type alias `Generic.Aux` is defined in the companion object of `Generic`
 
-```scala
+~~~scala
 object Generic {
   type Aux[P,L] = Generic[P] { type Out = L }  
   ...
 }
-```
+~~~
 and it reads as follows:
 `Generic.Aux[P,L]` is the type of `Generic[P]` when the type alias `Generic.Out` within it equals to `L`.
 Again, this is a *predicate*. When we write `(implicit gen: Generic.Aux[P,L])`
@@ -767,25 +764,25 @@ we want proof that there exist some HList `L` such that `Person` can be converte
 But then, you may ask, why can we just write `Generic[P,L]`, and be done with it ?
 Recall that in one of our first examples we wanted to convert a `Person(String,Int)` into the corresponding HList:
 
-```scala
+~~~scala
 val gen = Generic[Person]
 val hl = gen.to(p)
-```
+~~~
 
 If `L` were part of the type signature of `Generic` then we would need to write:
 
-```scala
+~~~scala
 val gen = Generic[Person, L]
-```
+~~~
 
 but then `L` would be a fresh type parameter, which cannot occur in that position!
 
-```scala
+~~~scala
 scala> val gen = Generic[Person, L]
 <console>:19: error: not found: type L
        val gen = Generic[Person, L]
                                  ^
-```
+~~~
 
 The type member trick is useful to “hide” the type parameter in those situations where it is not only unnecessary (the type `L` of the HList is **univocally** determined by `Person`) but also a problem, because we would now be required to explicitly give the HList type
 for all the `Generic` instances we wanted to create!
@@ -805,20 +802,20 @@ We will show how the `applyProduct` works by encoding it in Prolog.
 The type-level constraints of our running example can be re-implemented in Prolog.
 A tuple can be defined just like in Scala:
 
-```prolog
+~~~prolog
 (arg_type1, arg_type2, ..., arg_typeN)
-```
+~~~
 
 Since we know that in Scala we can always transform a `FunctionN` into a `Function1` of a `TupleN` for all `N>1`, we can represent a function type as:
 
-```prolog
+~~~prolog
 fn((arg_type1, arg_type2, ..., arg_typeN), ret_type)
-```
+~~~
 and, when there is only one arg, simply:
 
-```prolog
+~~~prolog
 fn(arg_type1, ret_type)
-```
+~~~
 
 for instance, the type signature for function `def stringify(s: Any): String`
 could be represented by `fn(any, string)`
@@ -826,13 +823,13 @@ could be represented by `fn(any, string)`
 
 Now, let us try and translate the constraints in the signature of `applyProduct` into Prolog predicates.
 
-```scala
+~~~scala
 def applyProduct[P <: Product, F, L <: HList, R](p: P)(f: F)
   (implicit
   	 gen: Generic.Aux[P, L],
   	 fp: FnToProduct.Aux[F, L => R]
   ) = ...
-```
+~~~
 
 In the previous section we saw that type parameters in a `def` can be seen as the variables in a Prolog rule,
 while the rule body can be expressed using type parameters.
@@ -846,51 +843,52 @@ We may define a `can_apply_product(P,F,L,R)` predicate as follows:
 
 	For instance, in the case of a pair:
 
-	```prolog
-	product(X):- X = (_,_).
-	```
+  ~~~prolog
+  product(X):- X = (_,_).
+  ~~~
 
 	Or, in short:
 
-	```prolog
-	product((_,_)).
-	product((_,_,_)).
-	... % for >3 tuples
-	```
+  ~~~prolog
+  product((_,_)).
+  product((_,_,_)).
+  ... % for >3 tuples
+  ~~~
 
 * `F` is unconstrained (in the sense that there is no unary predicate on F)
 
-* 	`L` must be an `HList`, which in Prolog we can represent as a list.
+* `L` must be an `HList`, which in Prolog we can represent as a list.
     We can define the predicate `hlist`, which holds when `L` is a list.
 
-	```prolog
-	hlist(X):- X = [_|_]. % [Head | Tail]
-	product([_|_]). % in short.
-	```
+  ~~~prolog
+  hlist(X):- X = [_|_]. % [Head | Tail]
+  product([_|_]). % in short.
+  ~~~
+
 * `R` is unconstrained (in the sense that there is no unary predicate on F)
 
 * `Generic.Aux[P,L]` puts in relation product `P` with HList `L`. In Prolog, this would a predicate. Let us see it for the case of a pair `P`:
 
-	```prolog
-	generic(P, L) :-
-	    product(P),
-		(X, Y) = P,  % deconstruct P into X and Y (the correct term is «unify»)
-		hlist(L),
-		[X, Y] = L.  % deconstruct L into X and Y
-	```
+  ~~~prolog
+  generic(P, L) :-
+      product(P),
+  	(X, Y) = P,  % deconstruct P into X and Y (the correct term is «unify»)
+  	hlist(L),
+  	[X, Y] = L.  % deconstruct L into X and Y
+  ~~~
 
 	But, really, in Prolog we can drop the `product` and `hlist` constraints, because
 	they are really implied by the syntax `(X,Y)` and `[X,Y]`, respectively. So this can be further shortened:
 
-	```prolog
-	generic((X,Y), [X,Y]).
-	```
+  ~~~prolog
+  generic((X,Y), [X,Y]).
+  ~~~
 
 * `FnToProduct.Aux[F, L => R]` puts in relation the type parameter `F` with the function type `L => R`. In Prolog, this could be described as the predicate
 
-	```prolog
-	fn_to_product(F, fn(L, R)):
-	```
+  ~~~prolog
+  fn_to_product(F, fn(L, R)):
+  ~~~
 
  in fact, we decided to represent any `T => R` function type using `fn(T,R)`.
  The `fn_to_product` predicate shall hold when
@@ -900,18 +898,18 @@ We may define a `can_apply_product(P,F,L,R)` predicate as follows:
 
  This can be written as follows:
 
- ```prolog
- fn_to_product(F, fn(L, R)) :-
-     fn(Args,R) = F,
-     generic(Args, L).    
- ```
+~~~prolog
+fn_to_product(F, fn(L, R)) :-
+   fn(Args,R) = F,
+   generic(Args, L).    
+~~~
 
- or, in short:
+  or, in short:
 
- ```prolog
- fn_to_product(fn(Args,R), L, R) :-
-     generic(Args, L).    
- ```
+~~~prolog
+fn_to_product(fn(Args,R), L, R) :-
+   generic(Args, L).    
+~~~
 
 The `can_apply_product` predicate, which encodes all of the type constraints
 in the `applyProduct` Scala function, puts in relation:
@@ -923,7 +921,7 @@ in the `applyProduct` Scala function, puts in relation:
 
 Let's see Prolog and Scala side-by-side:
 
-<table>
+<!-- <table>
 <tr><td><code>
 <pre>
 can_apply_product(P, F, L, R) :-
@@ -938,12 +936,12 @@ def applyProduct[P <: Product, F, L <: HList, R](p: P)(f: F)
   	 fp: FnToProduct.Aux[F, L => R])
 </pre></code>
 </td></tr>
-</table>
+</table> -->
 
 So, let's see it as a whole:
 
 
-```prolog
+~~~prolog
 generic((X,Y), [X,Y]).
 
 fn_to_product(fn(Args,R), L, R) :-
@@ -952,7 +950,7 @@ fn_to_product(fn(Args,R), L, R) :-
 can_apply_product(P, F, L, R) :-
     generic(P,L),
 	fn_to_product(F, fn(L, R)).
-```
+~~~
 
 ## Conclusions and References
 

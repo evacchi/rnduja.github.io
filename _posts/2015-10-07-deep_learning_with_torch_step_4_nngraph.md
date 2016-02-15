@@ -18,13 +18,13 @@ The [nngraph](https://github.com/torch/nngraph) library provides tools to create
 ## Install
 You can install `nngraph` with
 
-```
+~~~
 $ luarocks install nngraph
-```
+~~~
 
 As an optional dependecy you can install `graphviz`, if you have it you will be able to display the graph that you have created. For installing the package run the appropriate command below:
 
-```bash
+~~~bash
 # Mac users
 $ brew install graphviz
 
@@ -33,7 +33,7 @@ $ sudo apt-get install graphviz -y
 
 # ArchLinux
 $ sudo pacman -S graphviz
-```
+~~~
 
 
 **NB:** please use the [offical graphviz installer](http://www.graphviz.org/Download_macos.php) instead of `brew` otherwise you cannot be able to use it with `nngraph`.
@@ -49,7 +49,7 @@ Let's briefly recap some `nn` [Torch](https://github.com/torch/torch7/blob/maste
 
 Any `Module` can be wrapped in a `nngraph.Node` by `require nngraph`.
 
-```lua
+~~~lua
 th> require 'nngraph'
 
 th> nn.Identity() -- this create an identity module
@@ -57,26 +57,26 @@ nn.Identity
 
 th> nn.Identity()() -- this create an identity module and wraps it in a node
 nngraph.Node
-```
+~~~
 The `nngraph` library provides a way to build any complex network focusing on the network graph and avoiding the use of `containers`.
 `nngraph` overloads the `__call__` operator (i.e. the () operator used for function calls) on all `nn.Module` objects. By executing the `__call__` operator it is returned a node wrapping a `nn.Module`.
 
-```lua
+~~~lua
 h1 = nn.Linear(20, 10)()
 h2 = nn.Linear(10, 1)(h1)
 mlp = nn.gModule({h1},{h2})
-```
+~~~
 The call operator takes the parents of the node as arguments, which specify which modules will feed into this one during a forward pass.
 
 ## Examples
 
 ### Example 1
 
-```lua
+~~~lua
 h1 = nn.Linear(20, 10)()
 h2 = nn.Linear(10, 1)(h1)
 model = nn.gModule({h1},{h2})
-```
+~~~
 
 The code above describes a multi layer perceptron with 2 hidden layers. The first layer `h1`  is a Linear transformation from 20 to 10. The second layer gets an input of size 10 and an output of size 1 and takes as input the layer `h1`. This means that there is an edge the goes out from `h1` and enters into `h2`.
 
@@ -84,14 +84,14 @@ Finally we make `model` calling `nn.gModule` with `h1` and `h2` as parameters. `
 
 Using `graphviz` we can plot the neural network in in the example above.
 
-```lua
+~~~lua
 require 'nngraph'
 
 -- draw graph (the forward graph, '.fg'), use it with itorch notebook
 graph.dot(model.fg, 'MLP')
 -- or save graph to file MLP.svg and MLP.dot
 graph.dot(model.fg, 'MLP', 'MLP')
-```
+~~~
 ![MLP](/img/MLP.png)
 
 The first and last nodes are *dummy nodes* and regroup all inputs and outputs of the graph. The `module` entry describes the function of the node, as applies to `input`, and producing a result of the shape `gradOutput`; `mapindex` contains pointers to the parent nodes.
@@ -100,7 +100,7 @@ The first and last nodes are *dummy nodes* and regroup all inputs and outputs of
 
 we create a `module` that takes 2 inputs and 2 outputs
 
-```lua
+~~~lua
 require 'nngraph'
 
 h1 = nn.Linear(20, 20)()
@@ -118,7 +118,7 @@ x2 = torch.rand(10)
 gmod:updateOutput({x1, x2})
 gmod:updateGradInput({x1, x2}, {torch.rand(1), torch.rand(1)})
 graph.dot(gmod.fg, 'Big MLP')
-```
+~~~
 
 ![BigMLP](/img/MLP2.png)
 

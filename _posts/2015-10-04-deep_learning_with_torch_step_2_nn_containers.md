@@ -27,7 +27,7 @@ The main functions of `Container` are:
 
 Sequential provides a way to plug layers together in a feed-forward fully connected manner.
 
-```lua
+~~~lua
 
 model = nn.Sequential()
 model:add( nn.Linear(10, 25) ) -- 10 input, 25 hidden units
@@ -36,14 +36,14 @@ model:add( nn.Linear(25, 1) ) -- 1 output
 
 print(model:forward(torch.randn(10)))
 
-```
+~~~
 
 which gives as output
 
-```lua
+~~~lua
 -0.1815
 [torch.Tensor of dimension 1]
-```
+~~~
 
 Moreover this container offers a method to `insert` a module at `index` and `remove` a module at `index`.
 
@@ -51,12 +51,12 @@ Moreover this container offers a method to `insert` a module at `index` and `rem
 
 It creates a container that allows to train in parallel different layers. For example we can define a model composed of two parallel layers with the same input size. Their output is concatenated together.
 
-```lua
+~~~lua
 model = nn.Parallel(2,1)
 model:add(nn.Linear(10,3))
 model:add(nn.Linear(10,2))
 print(model:forward(torch.randn(10,2)))
-```
+~~~
 
 gives as output a Tensor `5x1`
 
@@ -64,12 +64,12 @@ gives as output a Tensor `5x1`
 
 Concat concatenates the output of one layer of "parallel" modules along the provided dimension dim: they take the same inputs, and their output is concatenated.
 
-```
+~~~
 model=nn.Concat(1);
 model:add(nn.Linear(5,3))
 model:add(nn.Linear(5,7))
 print(model:forward(torch.randn(5)))
-```
+~~~
 
 ## Conclusion
 

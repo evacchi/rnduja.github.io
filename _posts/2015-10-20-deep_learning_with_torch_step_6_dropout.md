@@ -27,7 +27,7 @@ This significantly reduces overfitting and gives major improvements over other r
 
 The simple example below shows how each input element has a probability of p of being dropped.
 
-```lua
+~~~lua
 require 'nn'
 
 module = nn.Dropout()
@@ -44,20 +44,20 @@ module = nn.Dropout()
  10   0   0   0
 [torch.DoubleTensor of dimension 2x4]
 
-```
+~~~
 
 Furthermore, the ouputs are scaled by a factor of `1/(1-p)` during training.
 
 ### Using Dropout in Model Building
 Using Dropout in network definition is simple as adding a layer to a Sequential Model. Dropout Modules can be used as layer between each layer of a model.
 
-```lua
+~~~lua
 
 model = nn.Sequential()
 model:add(nn.Linear(10, 25))
 model:add(nn.Dropout())
 model:add(nn.Tanh())
 model:add(nn.Linear(25, 1))
-```
+~~~
 
 Here we added a Dropout between the two linear models with mixed with a non linear `Tanh`.

@@ -34,21 +34,21 @@ Let us show some examples to understand how criterions can be used.
 
 ### Classification: The negative log likelihood criterion
 
-```lua
+~~~lua
 criterion = nn.ClassNLLCriterion([weights])
-```
+~~~
 `ClassNLLCriterion` can be used to train a classificator on `n` classes. It takes optionally a 1 dimension tensor of `weights` which is useful if you have an unbalanced training set.
 
 The `forward` must have as input a *log-prograbilities* of each class. Log-probabilities can be obtained by appending a `nn.LogSoftMax` as last layer of your container (like `Sequential`).
 The loss can be described as:
 
-```lua
+~~~lua
 loss(x, class) = -weights[class] * x[class]
-```
+~~~
 
 The following code fragment show how to use a criterion to perform a gradient step. *This is the function that we should pass to an optimizer*
 
-```lua
+~~~lua
 function gradientUpdate(model, x, y, learningRate)
    local criterion = nn.ClassNLLCriterion()
    local prediction = model:forward(x)
@@ -58,19 +58,19 @@ function gradientUpdate(model, x, y, learningRate)
    model:backward(x, gradient)
    model:updateParameters(learningRate)
 end
-```
+~~~
 
 ### Regression: MSECriterion
 
-```lua
+~~~lua
 criterion = nn.MSECriterion()
-```
+~~~
 Creates a criterion that measures the mean squared error between n elements in the input x and output y:
 
-```lua
+~~~lua
 loss(x, y) = 1/n \sum |x_i - y_i|^2
 
-```
+~~~
 If x and y are d-dimensional Tensors with a total of n elements, the sum operation still operates over all the elements, and divides by n. The two Tensors must have the same number of elements (but their sizes might be different).
 
 
@@ -99,7 +99,7 @@ If x and y are d-dimensional Tensors with a total of n elements, the sum operati
 ## A Complete Example
 In the following example we train a neural network for a classification task. The function `gradientUpgrade` performs one gradient step (forward, backward with update parameter.
 
-```lua
+~~~lua
 require 'nn'
 
 function gradientUpgrade(model, x, y, criterion, learningRate)
@@ -132,5 +132,5 @@ print('prediction for x2 = ' .. model:forward(x2)[1] .. ' expected value ' .. y2
 
 print('loss after training for x1 = ' .. criterion:forward(model:forward(x1), y1))
 print('loss after training for x2 = ' .. criterion:forward(model:forward(x2), y2))
-```
+~~~
 The examples is available and runnable from the [torch-examples repo](https://github.com/rnduja/torch-examples/blob/master/3_example_simple_nn.lua).

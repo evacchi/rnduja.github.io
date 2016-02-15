@@ -31,22 +31,22 @@ often hits its limits. A few things are desirable:
 To give an example of the first problem, a nested loop in Scala
 typically looks like
 
-```scala
+~~~scala
 for {
   xs <- xss
   x <- xs
 } yield x * x
-```
+~~~
 
 which the first steps of `scalac` transform into
 
-```scala
+~~~scala
 xss flatMap { xs =>
   xs map { x =>
     x *x
   }
 }
-```
+~~~
 
 This adds the overhead of calling a function inside each loop step,
 and while this will be inlined by the JVM JIT, it would be nice to
@@ -140,7 +140,7 @@ expect from C.
 Let me give a simple example of computing the average of a
 sequence of points just to give an idea of the flavour:
 
-```nimrod
+~~~nimrod
 import sequtils
 
 type Point = tuple[x, y: float]
@@ -151,7 +151,7 @@ proc `/`(p: Point, k: float): Point = (p.x / k, p.y / k)
 
 proc average(points: seq[Point]): Point =
   foldl(points, a + b) / float(points.len)
-```
+~~~
 
 The use of `foldl` here makes it look like what one would
 write in a functional language, but in fact it is an example
@@ -170,19 +170,19 @@ hence you can predict rather well how Nim programs are compiled.
 Apart from basic types such as `int64` or `float32`, Nim has complex
 types in the form of object, defined like
 
-```nimrod
+~~~nimrod
 type Circle = object
   x, y, radius: float
-```
+~~~
 
 that map to the corresponding C structs. Also, Nim functions - declared
 with `proc` - are compiled into C functions. Calling C is then rather
 easy, since objects have the same layout in memory, and functions are the
 same. Here we import the `malloc` function from the C standard library:
 
-```nimrod
+~~~nimrod
 proc malloc(size: uint): pointer {.header: "<stdlib.h>", importc: "malloc".}
-```
+~~~
 
 On top of this, Nim, adds a lot of features that make programming simpler
 while adding no runtime overhead. The most prominent departure from the C
@@ -199,16 +199,16 @@ functions, both generic and ad-hoc. Generic functions take type parameters and
 are compiled by specialization to each concrete type for which they are called.
 An example would be
 
-```nimrod
+~~~nimrod
 proc last[A](xs: seq[A]): A = xs[xs.len - 1]
-```
+~~~
 
 The fact that the types are checked only when a concrete type is provided allows
 to write things such as
 
-```nimrod
+~~~nimrod
 proc sum[A](xs: seq[A]): A = foldl(xs, a + b)
-```
+~~~
 
 Notice that this only makes sense when `A` implements addition. Nim will check
 this for a concrete type `A` when `sum` is actually called, that is, when `sum`
@@ -228,12 +228,12 @@ C libraries that export many different implementations for the same type. For
 instance in my [linear-algebra library](https://github.com/unicredit/linear-algebra)
 I can import various BLAS routines under the same name, like
 
-```nimrod
+~~~nimrod
 proc scal(N: int, ALPHA: float32, X: ptr float32, INCX: int)
   {. header: header, importc: "cblas_sscal" .}
 proc scal(N: int, ALPHA: float64, X: ptr float64, INCX: int)
   {. header: header, importc: "cblas_dscal" .}
-```
+~~~
 
 and be sure that the suitable implementation of `scal` will be called,
 according to the arguments I pass.
@@ -250,13 +250,13 @@ sublanguage.
 The first, rather trivial, example of this is the fact that constants
 can be defined by calling functions, like
 
-```nimrod
+~~~nimrod
 import math
 
 const
   giga = 2 ^ 9
   seqNumber = random([1, 2, 3, 4, 5, 6])
-```
+~~~
 
 For something more sophisticated, Nim has both [templates](http://nim-lang.org/docs/manual.html#templates)
 and [macros](http://nim-lang.org/docs/manual.html#macros). Macros, like in
@@ -267,9 +267,9 @@ Templates can be thought as functions that are always inlined, and as such
 they share the function syntax. In fact, a way to ensure that `last` above
 is inlined would be to just change the definition to
 
-```nimrod
+~~~nimrod
 template last(xs: expr): expr = xs[xs.len - 1]
-```
+~~~
 
 Macros, on the other hand, allow to introduce more complex language constructs.
 A good example is my [Patty library](https://github.com/andreaferretti/patty)
@@ -277,7 +277,7 @@ for pattern matching. Nim, per se, does not have a concise way to define algebra
 data types, nor it has pattern matching facilities. With the macros defined in
 Patty, one can write
 
-```nimrod
+~~~nimrod
 variant Shape:
   Circle(r: float)
   Rectangle(w: float, h: float)
@@ -292,7 +292,7 @@ match r:
     echo "It is a rectangle of width ", $w
   case UnitCircle():
     echo "It is a UnitCircle"
-```
+~~~
 
 The `match` above is transformed into a switch at compile time. Actually, the
 support for pattern matching in Patty is quite limited (most prominently, there
@@ -310,21 +310,21 @@ where this feature is used to encode the dimensions of vectors and matrices
 inside the type of the matrix itself. A typical usage of the library looks
 like
 
-```nimrod
+~~~nimrod
 import linalg
 
 let
   v = randomVector(12)
   m = randomMatrix(8, 12)
   w = m * v
-```
+~~~
 
 Here the type of `v` is for instance `Vector64[12]`, while `m` has type
 `Matrix64[8, 12]`. As such, a usage like
 
-```nimrod
+~~~nimrod
 echo m * randomVector(11)
-```
+~~~
 
 does not compile, since dimensions do not match. Something similar can be done
 to encode type-safe modular arithmetic, provided moduli are known at compile time.
@@ -336,13 +336,13 @@ rings with a naive implementation, delegating to BLAS for the case of `float32`
 or `float64`. To do this, one could just have type `Vector[N, A]` and `Matrix[M, N, A]`,
 and then special-case operations for floats:
 
-```nimrod
+~~~nimrod
 proc `*`[M, N, A](m: Matrix[M, N, A], v: Vector[N, A]): Vector[M, A] =
   when A is float32 or A is float64:
     # BLAS implementation
   else:
     # fallback implementation
-```
+~~~
 
 Here the `when` keyword acts like `if` but is evaluated at compile time, opening
 all range of checks on anything that is statically known. In fact, `when` is
@@ -353,23 +353,23 @@ A nice application of this is in tandem with the `compiles` function, which take
 an arbitrary expression and return a boolean. This is used in the unit tests for
 `linalg` to test that forbidden operations do not compile, as in
 
-```nimrod
+~~~nimrod
 test "vector dimension should agree in a sum":
   let
     u = vector([1.0, 2.0, 3.0, 4.0, 5.0])
     v = vector([1.0, 2.0, 3.0, 4.0])
   when compiles(u + v): fail()
   when compiles(u - v): fail()
-```
+~~~
 
 A final opportunity is to give user-defined optimizations in the form of
 [rewrite rules on the AST](http://nim-lang.org/docs/manual.html#term-rewriting-macros).
 These allow to pattern match on the AST and make your own optimizations.
 I use them in `linalg` in order to rewrite an expression such as
 
-```nimrod
+~~~nimrod
 echo v1 + 5.3 * v2
-```
+~~~
 
 in terms of a single BLAS call (instead of a scalar multiplication followed by a sum).
 
@@ -384,13 +384,13 @@ reference counting with cycle detection, and the compiler makes use of type info
 to infer when cycles are impossible to form. One can also mark data structures as
 acyclic explicitly, like this:
 
-```nimrod
+~~~nimrod
 type
   Node = ref NodeObj
   NodeObj {.acyclic, final.} = object
     left, right: Node
     data: string
-```
+~~~
 
 Different threads have each their own heap (there is also a shared heap for shared data),
 so that heap scans are lighter. Moreover, the GC only fires during allocation, and it
@@ -422,7 +422,7 @@ it is friendly to a functional programming style, thanks to higher-order functio
 and even an [effect system](http://nim-lang.org/docs/manual.html#effect-system) to track
 exceptions, I/O and so on. A typical example would look like
 
-```nimrod
+~~~nimrod
 import sequtils, future
 
 type Person = object
@@ -433,7 +433,7 @@ type Person = object
 let people = # ...
 
 let friends = people.filter(p: Person => p.friendliness > 1).map(p: Person => p.name)
-```
+~~~
 
 Benefits of Nim in scientific programming
 -----------------------------------------
@@ -448,7 +448,7 @@ and together with macros it can form the basis of DSLs for various domains, such
 as linear algebra, neural networks or symbolic programming. For instance, let me
 take this example straight from the showcase for [Torch](http://torch.ch)
 
-```lua
+~~~lua
 -- choose a dimension
 N = 5
 
@@ -468,11 +468,11 @@ b = torch.rand(N)
 function J(x)
    return 0.5*x:dot(A*x)-b:dot(x)
 end
-```
+~~~
 
 In Nim it doesn't really look much more complex:
 
-```nimrod
+~~~nimrod
 import linalg
 # choose a dimension
 const N = 5
@@ -491,7 +491,7 @@ let b = randomVector(N)
 
 # create the quadratic form
 proc J(x: Vector64[N]): Vector64[N] = 0.5 * x * A * x - b * x
-```
+~~~
 
 Notice that the Nim code validates the dimension at compile
 time and saves a few BLAS calls!

@@ -17,7 +17,7 @@ This package implements several optimization methods that can be used to train a
 
 In the previous posts we showed how to train a neural network using a `for` and a *learning function*. The method `gradientUpgrade` peforms a learning step, which consists of a forward, backward and upgrade over the network weights.
 
-```lua
+~~~lua
 function gradientUpgrade(model, x, y, criterion, learningRate, i)
 	local prediction = model:forward(x)
 	local err = criterion:forward(prediction, y)
@@ -29,7 +29,7 @@ function gradientUpgrade(model, x, y, criterion, learningRate, i)
 	model:updateParameters(learningRate)
    model:zeroGradParameters()
 end
-```
+~~~
 
 However, the `Optim` package provides a complete list of already implemented optimization algorithms such as:
 
@@ -48,9 +48,9 @@ These optimization methods can be used to train a neural network.
 
 Each optimization method is based on the same interface:
 
-```lua
+~~~lua
 w_new, fs = optim.method(func, w, state)
-```
+~~~
 
 where:
 
@@ -65,7 +65,7 @@ where:
 Each method has a list of parameters that can be check on the source code.
 Below there is a simple example of training with optim.
 
-```lua
+~~~lua
 algo_params = {
    learningRate = 1e-3,
    momentum = 0.5
@@ -80,13 +80,13 @@ for i,sample in ipairs(training_samples) do
 
     optim.sgd(fevale,x,algo_params)
 end
-```
+~~~
 
 # Example LSTM with SGD
 
 We take the example [lstm with sequencer](https://github.com/rnduja/torch-examples/blob/master/7_example_lstm_optim_class.lua) and replace the `iteration for` and the `gradientUpdate` with a `feval` function.
 
-```lua
+~~~lua
 require 'rnn'
 require 'optim'
 
@@ -103,12 +103,12 @@ model:add(nn.Sequencer(nn.Linear(hiddenSize, nIndex)))
 model:add(nn.Sequencer(nn.LogSoftMax()))
 criterion = nn.SequencerCriterion(nn.ClassNLLCriterion())
 
-```
+~~~
 Defines the model decorated with a `Sequencer`. Note that the criterion is decorated with `nn.SequenceCriterion`.
 
 ------------
 
-```lua
+~~~lua
 -- create a Dummy Dataset, dummy dataset (task predict the next item)
 dataset = torch.randperm(nIndex)
 
@@ -139,7 +139,7 @@ function nextBatch()
 	return inputs, targets
 end
 
-```
+~~~
 Defines:
 
 - a dummy dataset composed of a random permutation from 1 to nIndex,
@@ -148,7 +148,7 @@ Defines:
 
 ------------
 
-```lua
+~~~lua
 -- get weights and loss wrt weights from the model
 x, dl_dx = model:getParameters()
 
@@ -175,13 +175,13 @@ feval = function(x_new)
 	return loss_x, dl_dx
 end
 
-```
+~~~
 
 Get the parameters from the built model and defines the `feval` function for the optimizer method
 
 --------------
 
-```lua
+~~~lua
 sgd_params = {
    learningRate = 0.1,
    learningRateDecay = 1e-4,
@@ -200,7 +200,7 @@ for i = 1,1e4 do
 	end
 end
 
-```
+~~~
 Defines the parameter for the method and the main for to perform mini-batches on the dataset. Each 100 mini-batches it prints the error.
 
 Check the runnable examples for [classification](https://github.com/rnduja/torch-examples/blob/master/7_example_lstm_optim_class.lua) and [regression](https://github.com/rnduja/torch-examples/blob/master/7_example_lstm_optim_regr.lua).

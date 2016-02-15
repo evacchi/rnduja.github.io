@@ -21,9 +21,9 @@ The classes of the [rnn](https://github.com/Element-Research/rnn) library can be
 ## AbstractRecurrent
 All the classes inherited from the class `AbstractRecurrent`
 
-```lua
+~~~lua
 rnn = nn.AbstractRecurrent(rho)
-```
+~~~
 This class takes as parameter:
 
 - `rho`, that is the maximum number of steps to backpropagate through time (BPTT). The default value for `rho` is 9999 and means that the effect of the network is backpropagated through the entire sequence whatever its length.
@@ -55,7 +55,7 @@ A **forward** keeps a log of intermediate steps and increase the step 1 by 1. Ba
 ### Example
 In the following an example an RNN based model and a function to update the gradient.
 
-```lua
+~~~lua
 model = nn.Sequential()
 model:add(nn.Recurrent(
    hiddenSize, nn.LookupTable(nIndex, hiddenSize),
@@ -65,9 +65,9 @@ model:add(nn.Recurrent(
 model:add(nn.Linear(hiddenSize, nIndex))
 model:add(nn.LogSoftMax())
 criterion = nn.ClassNLLCriterion()
-```
+~~~
 
-```lua
+~~~lua
 function gradientUpgrade(model, x, y, criterion, learningRate, i)
 	local prediction = model:forward(x)
 	local err = criterion:forward(prediction, y)
@@ -88,7 +88,7 @@ function gradientUpgrade(model, x, y, criterion, learningRate, i)
       model:zeroGradParameters()
    end
 end
-```
+~~~
 
 Checks the complete examples for:
 
@@ -101,7 +101,7 @@ Any `AbstractRecurrent` instance can be decorated with a **Sequencer** such that
 
 - Each layer in the model is annotated with sequencer:
 
-	```lua
+	~~~lua
 	-- Model
 	model = nn.Sequential()
 	model:add(nn.Sequencer(nn.Recurrent(
@@ -113,10 +113,10 @@ Any `AbstractRecurrent` instance can be decorated with a **Sequencer** such that
 	model:add(nn.Sequencer(nn.LogSoftMax()))
 
 	criterion = nn.SequencerCriterion(nn.ClassNLLCriterion())
-	```
+	~~~
 - The inputs are now presented as a table with size `batchSize` of tensor of size `rho`.
 
-	```lua
+	~~~lua
 	for i = 1, 10e4 do
 	   local inputs, targets = {}, {}
 	   for step = 1, rho do
@@ -135,7 +135,7 @@ Any `AbstractRecurrent` instance can be decorated with a **Sequencer** such that
 
 	   i = gradientUpgrade(model, inputs, targets, criterion, lr, i)
 	end		
-	```
+	~~~
 
 ### Pros on using Sequencers
 
@@ -160,14 +160,14 @@ The `nn.LSTM(inputSize, outputSize, [rho])` constructor takes 3 arguments:
 
 ![LSTM](https://github.com/Element-Research/rnn/raw/master/doc/image/LSTM.png)
 
-```
+~~~
 i[t] = σ(W[x->i]x[t] + W[h->i]h[t−1] + W[c->i]c[t−1] + b[1->i])      (1)
 f[t] = σ(W[x->f]x[t] + W[h->f]h[t−1] + W[c->f]c[t−1] + b[1->f])      (2)
 z[t] = tanh(W[x->c]x[t] + W[h->c]h[t−1] + b[1->c])                   (3)
 c[t] = f[t]c[t−1] + i[t]z(t)                                         (4)
 o[t] = σ(W[x->o]x[t] + W[h->o]h[t−1] + W[c->o]c[t] + b[1->o])        (5)
 h[t] = o[t]tanh(c[t])                                                (6)
-```
+~~~
 
 The image and formulas above show the computation done in LSTM.
 Checks the [official doc](https://github.com/Element-Research/rnn#rnn.LSTM) for a complete explanation. In the following we us `FastLSTM` that performs the computation of input, forget and output gates together.
@@ -175,7 +175,7 @@ Checks the [official doc](https://github.com/Element-Research/rnn#rnn.LSTM) for 
 ### Example
 Let us change the previous example in order to use LSTM and the Sequencer decorator.
 
-```lua
+~~~lua
 require 'rnn'
 
 batchSize = 10
@@ -197,10 +197,10 @@ function gradientUpgrade(model, x, y, criterion, learningRate, i)
    model:zeroGradParameters()
 end
 
-```
+~~~
 We use the same `gradientUpgrade` function.
 
-```lua
+~~~lua
 
 
 -- Model
@@ -212,11 +212,11 @@ model:add(nn.Sequencer(nn.LogSoftMax()))
 
 criterion = nn.SequencerCriterion(nn.ClassNLLCriterion())
 
-```
+~~~
 
 Now our model is decorated with `Sequencer`.
 
-```lua
+~~~lua
 -- dummy dataset (task predict the next item)
 dataset = torch.randperm(nIndex)
 -- this dataset represent a random permutation of a sequence between 1 and nIndex
@@ -248,7 +248,7 @@ for i = 1, 10000 do
 
    i = gradientUpgrade(model, inputs, targets, criterion, lr, i)
 end
-```
+~~~
 Finally, we perform the learning passing as `inputs` and `targets` a table of sequences.
 
 ## Conclusion

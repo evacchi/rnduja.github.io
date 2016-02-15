@@ -18,12 +18,12 @@ We provide a simple installation process for Torch on Mac OS X and Ubuntu 12+:
 
 Torch can be installed to your home folder in ~/torch by running these three commands:
 
-```bash
+~~~bash
 # in a terminal, run the commands
 curl -s https://raw.githubusercontent.com/torch/ezinstall/master/install-deps | bash
 git clone https://github.com/torch/distro.git ~/torch --recursive
 cd ~/torch; ./install.sh
-```
+~~~
 
 The [first script](https://raw.githubusercontent.com/torch/ezinstall/master/install-deps)
 installs the basic package dependencies that LuaJIT and Torch require.
@@ -36,32 +36,32 @@ and then uses LuaRocks (the lua package manager) to install core packages like
 
 The script adds torch to your PATH variable. You just have to source it once to refresh your env variables
 
-```bash
+~~~bash
 # On Linux
 source ~/.bashrc
 # On OSX
 source ~/.profile
-```
+~~~
 
 If you ever need to uninstall torch, simply run the command:
 
-```bash
+~~~bash
 rm -rf ~/torch
-```
+~~~
 
 New packages can be installed using Luarocks from the command-line:
 
-```bash
+~~~bash
 $ luarocks install image
 $ luarocks list
-```
+~~~
 
 Once installed you can run torch with the command "th" from you prompt!
 
 The easiest way to learn and experiment with Torch is by starting an
 interactive session (also known as the torch read-eval-print loop or [TREPL](https://github.com/torch/trepl/blob/master/README.md)):
 
-```bash
+~~~bash
 $ th
 
   ______             __   |  Torch7                                   
@@ -77,7 +77,7 @@ th> torch.Tensor{1,2,3}
 [torch.DoubleTensor of dimension 3]
 
 th>
-```
+~~~
 
 To exit the interactive session, type `^c` twice — the control key
 together with the `c` key, twice, or type `os.exit()`.
@@ -91,14 +91,14 @@ To evaluate expressions written in a source file `file.lua`, write
 To run code in a file non-interactively, you can give it as the first
 argument to the `th` command::
 
-```bash
+~~~bash
 $ th file.lua
-```
+~~~
 
 There are various ways to run Lua code and provide options, similar to
 those available for the ``perl`` and ``ruby`` programs:
 
-```bash
+~~~bash
  $ th -h
 Usage: th [options] [script.lua [arguments]]
 
@@ -111,7 +111,7 @@ Options:
   -gg,--gglobals     monitor global variables (throw an error on creation/access)
   -x,--gfx           start gfx server and load gfx env
   -i,--interactive   enter the REPL after executing a script
-```
+~~~
 
 TREPL is full of convenient features likes:
 

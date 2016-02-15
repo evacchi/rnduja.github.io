@@ -17,12 +17,12 @@ The class Module in [torch/nn](https://github.com/torch/nn) is an abstract class
 
 Module has two state variable as describe in its `_init()` function.
 
-```lua
+~~~lua
 function Module:__init()
    self.gradInput = torch.Tensor()
    self.output = torch.Tensor()
 end
-```
+~~~
 
 And the methods:
 
@@ -38,7 +38,7 @@ And the methods:
 
 Applies a linear transformation to the incoming data, i.e. `y = Ax + b`.
 
-```lua
+~~~lua
 -- define a module
 module = nn.Linear(10,5)
 
@@ -53,27 +53,27 @@ print(module.bias)
 -- the gradient
 print(module.gradWeight)
 print(module.gradBias)
-```
+~~~
 
 - **A forward step is computed by:**
 
-	```lua
+	~~~lua
 	x = torch.Tensor(10)
 	y = model:forward(x) -- or module:forward(x), module(x)
-	```
+	~~~
 
 - **A backward step is done by:**
 
-	```lua
+	~~~lua
 	gradInput = model:backward(x, y)
-	```
+	~~~
 	This function simply performs this task using two function calls to`updateGradInput(input, gradOutput)` and `accGradParameters(input,gradOutput,scale)`.
 
 
 ### Identity
 Creates a module that returns whatever is input to it as output.
 
-```lua
+~~~lua
 module = nn.Identity()
 model = nn.Sequential()
 model:add(module)
@@ -81,7 +81,7 @@ model:add(module)
 x = torch.range(1,5)
 
 model:forward(x) -- print x
-```
+~~~
 
 this layer can be used to model the input layer of a neural network
 
