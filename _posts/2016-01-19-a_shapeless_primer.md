@@ -8,9 +8,9 @@ header-img: "img/2016-01-19-a_shapeless_primer/water-drop.jpg"
 comments: true
 ---
 
-<!-- <div style="text-align:right; font-size:x-small">
+<div style="text-align:right; font-size:x-small">
 <a href="https://www.flickr.com/photos/sergiu_bacioiu/4178226353/in/faves-7926487@N06/">photo by Sergiu Bacioiu</a>
-</div> -->
+</div>
 
 
 Shapeless is a Scala library for [generic programming](https://en.wikipedia.org/wiki/Generic_programming). The name “Shapeless” comes from a famous Bruce Lee quote:
@@ -40,11 +40,9 @@ of Shapeless and a Shapeless-like coding-style.
 - [A Short Prolog Digression](a-short-prolog-digression)
 - [GrandChild In Scala](#grandchild-in-scala)
 - [Final Remarks](#final-remarks)
-
 - [Understanding `applyProduct` evidences and typeclasses](#understanding-applyproduct-evidences-and-typeclasses)
 - [The Aux Pattern](#the-aux-pattern)
 - [Bonus: `applyProduct` encoding in Prolog](#bonus-applyproduct-encoding-in-prolog)
-
 - [Conclusions and Reference](#conclusions-and-references)
 
 
@@ -138,6 +136,7 @@ I want to refer you to the many posts that describe how HLists can be implemente
 HLists (short for *Heterogeneous List*) are lists of objects of arbitrary types, where the type information for each object is kept. In fact, in Scala, we may do:
 
 ~~~scala
+import shapeless._
 val l = 10 :: "string" :: 1.0 :: Nil
 ~~~
 
@@ -201,6 +200,7 @@ to go back and forth between them.
 The way we go **from HLists to Tuples** is through the `tupled` method.
 
 ~~~scala
+import syntax.std.product._
 val hl  = 1 :: "String" :: 2.0 :: HNil
 val  t  = hl.tupled
 ~~~
@@ -921,7 +921,7 @@ in the `applyProduct` Scala function, puts in relation:
 
 Let's see Prolog and Scala side-by-side:
 
-<!-- <table>
+<table>
 <tr><td><code>
 <pre>
 can_apply_product(P, F, L, R) :-
@@ -936,7 +936,7 @@ def applyProduct[P <: Product, F, L <: HList, R](p: P)(f: F)
   	 fp: FnToProduct.Aux[F, L => R])
 </pre></code>
 </td></tr>
-</table> -->
+</table>
 
 So, let's see it as a whole:
 
