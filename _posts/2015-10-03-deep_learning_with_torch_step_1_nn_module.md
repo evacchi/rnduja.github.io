@@ -65,7 +65,7 @@ y = model:forward(x) -- or module:forward(x), module(x)
 - **A backward step is done by:**
 
 ~~~lua
-gradInput = model:backward(x, y)
+gradInput = model:backward(x, grad_out)
 ~~~
 
 	This function simply performs this task using two function calls to`updateGradInput(input, gradOutput)` and `accGradParameters(input,gradOutput,scale)`.

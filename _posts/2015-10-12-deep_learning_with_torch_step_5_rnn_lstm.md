@@ -87,6 +87,7 @@ function gradientUpgrade(model, x, y, criterion, learningRate, i)
       model:updateParameters(learningRate)
       model:zeroGradParameters()
    end
+   return i
 end
 ~~~
 
