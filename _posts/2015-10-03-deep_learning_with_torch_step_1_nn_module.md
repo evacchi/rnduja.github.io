@@ -57,16 +57,17 @@ print(module.gradBias)
 
 - **A forward step is computed by:**
 
-	~~~lua
-	x = torch.Tensor(10)
-	y = model:forward(x) -- or module:forward(x), module(x)
-	~~~
+~~~lua
+x = torch.Tensor(10)
+y = model:forward(x) -- or module:forward(x), module(x)
+~~~
 
 - **A backward step is done by:**
 
-	~~~lua
-	gradInput = model:backward(x, y)
-	~~~
+~~~lua
+gradInput = model:backward(x, y)
+~~~
+
 	This function simply performs this task using two function calls to`updateGradInput(input, gradOutput)` and `accGradParameters(input,gradOutput,scale)`.
 
 
