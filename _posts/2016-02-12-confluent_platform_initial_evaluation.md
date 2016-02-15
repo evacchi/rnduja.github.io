@@ -1,14 +1,14 @@
 ---
 layout:     post
 title:      "Confluent Platform"
-subtitle:   "An evaluation"
-date:       2016-02-12 14:00:00
+subtitle:   "An initial evaluation"
+date:       2016-02-15 09:00:00
 author:     "Fabio Fumarola"
 header-img: "img/2015-10-26-deep_learning_with_torch_step_7_optim/cover.jpg"
 comments: true
 ---
 
-# Confluent Platform Evaluation
+# Confluent Platform Initial Evaluation
 
 The goal of this blog post is to evaluate the [Confluent Platform](http://www.confluent.io/).
 
