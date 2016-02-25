@@ -461,7 +461,7 @@ That is, `A` and `B` are in a grandchild relation if `A` is child of some `X`
 and `X` is a child of `B`. A rule describes an implication relation, in fact, this, in logic may be written as:
 
 ~~~
-∃ A, B, X: child(A,X) ∧ child(X,B) → grandchild(A,B)
+∀ A, B, X: child(A,X) ∧ child(X,B) → grandchild(A,B)
 ~~~
 
 Notice that the implication is written in reverse, compared to the Prolog version.
