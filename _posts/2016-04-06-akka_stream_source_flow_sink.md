@@ -96,6 +96,19 @@ So we can see that Source is of type `Source[Int, NotUsed]` and computation is o
 Let us postpone in the following how to get results from stream execution and concentrate on Sources.
 Apart an Iterable a source can be started from: Iterator, Future, Graph, Publisher, Promise, single element, Tick and from Resource.
 
+At first let's define a simple trait to mix with out objects
+
+```scala
+import akka.actor.ActorSystem
+import akka.stream.ActorMaterializer
+
+trait AkkaStreamApp extends App {
+  implicit val actorSystem = ActorSystem("Tutorial")
+  implicit val materializer = ActorMaterializer()
+  implicit val executor = actorSystem.dispatcher
+}
+```
+
 #### Iterator
 
 ```scala
@@ -200,7 +213,7 @@ Here we create a source from an iterable, then we apply in order a `map` a `filt
 
 ```scala
 
-  def myFlow(): Flow[Int, Int, NotUsed] = Flow[Int]
+def myFlow(): Flow[Int, Int, NotUsed] = Flow[Int]
     .map(_ + 1)
     .filter(_ % 2 == 0)
 
@@ -214,13 +227,7 @@ val result = flow.run()
 In the above example we transformed part of the stream processing into the method `myFlow`, that we can combine with a source using the `via` method. 
 If you pay attention to the signature of `myFlow()` you can see that the class Flow transform an Int to an Int and does not use materialisation parameter (`Flow[Int,Int,Mat]`).
 Source and Flow class and object expose a rich API to work with streams. 
-		It allows you to process your stream one element at time, doing transformation, filtering. But it offers to you operators to deal with: timers, schedulers, merge of stream with different rates, apply async operations without blocking, monitor a stream, batch your stream in windows (and sliding windows), throttle the stream to limit its speed. Finally, it gives to you also basic operators to join and merge streams, but in the following we will that using the `GraphDSL` api we can deal with multiple streams in a more elegant way.
-
-
-
-
-you can create streams with a **delay**, scheduling **timers*, specify a completion timeout  
-
+It allows you to process your stream one element at time, doing transformation, filtering. But it offers to you operators to deal with: timers, schedulers, merge of stream with different rates, apply async operations without blocking, monitor a stream, batch your stream in windows (and sliding windows), throttle the stream to limit its speed. Finally, it gives to you also basic operators to join and merge streams, but in the following we will that using the `GraphDSL` api we can deal with multiple streams in a more elegant way.
 
 
 ### Conclusion
