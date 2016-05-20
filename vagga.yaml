@@ -1,0 +1,10 @@
+containers:
+  blog:
+    setup:
+    - !UbuntuRelease { version: 16.04 }
+    - !GemInstall [jekyll, jekyll-paginate]
+commands:
+  blog: !Command
+    container: blog
+    run:  jekyll serve
+    description: Serves blog
