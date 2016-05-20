@@ -6,6 +6,7 @@ date:       2015-11-06 12:00:00
 author:     "Andrea Ferretti"
 header-img: "img/2015-11-06-torch-autoencoder/cover.jpg"
 comments: true
+tags:       [torch,neural-networks]
 ---
 
 In the [previous example](/2015/10/13/torch-mnist), we have seen how to set up a simple Torch application to recognize digits from the MNIST set.

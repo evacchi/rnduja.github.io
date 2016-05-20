@@ -6,6 +6,7 @@ date:       2015-10-13 12:00:00
 author:     "Andrea Ferretti"
 header-img: "img/2015-10-13-torch-mnist/cover.jpg"
 comments: true
+tags:       [torch,neural-networks]
 ---
 
 If you have followed [Fabio's posts](/2015/10/01/deep_learning_with_torch) up until now, you should be familiar with the basic blocks of a Torch application.

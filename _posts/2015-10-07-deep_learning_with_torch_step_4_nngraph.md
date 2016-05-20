@@ -6,6 +6,7 @@ date:       2015-10-07 12:00:00
 author:     "Fabio Fumarola"
 header-img: "img/post.jpg"
 comments: true
+tags:       [torch,neural-networks]
 ---
 
 ## Abstract
