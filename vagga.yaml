@@ -1,7 +1,7 @@
 containers:
   blog:
     setup:
-    - !UbuntuRelease { version: 16.04 }
+    - !Ubuntu xenial
     - !GemInstall [jekyll, jekyll-paginate]
 commands:
   blog: !Command
