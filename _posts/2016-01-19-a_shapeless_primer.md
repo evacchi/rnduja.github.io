@@ -5,7 +5,8 @@ subtitle:   "A Shapeless Primer"
 date:       2016-01-19 12:00:00
 author:     "Edoardo Vacchi"
 header-img: "img/2016-01-19-a_shapeless_primer/water-drop.jpg"
-comments: true
+comments:   true
+tags:       [scala,type-programming]
 ---
 
 <div style="text-align:right; font-size:x-small">

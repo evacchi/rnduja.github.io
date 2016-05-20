@@ -5,7 +5,8 @@ subtitle:   "Hacking on the type level"
 date:       2015-10-07 12:00:00
 author:     "Andrea Ferretti"
 header-img: "img/2015-10-07-scala-dependent-types/cover1.jpg"
-comments: true
+comments:   true
+tags:       [scala,type-programming]
 ---
 
 This is the [iScala](https://github.com/mattpap/IScala) notebook for the talk I presented at the [Scala Italy](http://www.scala-italy.it/) conference.

@@ -5,7 +5,8 @@ subtitle:   "Back to the future"
 date:       2015-10-21 12:00:00
 author:     "Andrea Ferretti"
 header-img: "img/2015-10-21-scientific-nim/cover.jpg"
-comments: true
+comments:   true
+tags:       [nim]
 ---
 
 

@@ -5,7 +5,8 @@ subtitle:   "Source ~> Flow ~> Sink"
 date:       2016-05-06 09:00:00
 author:     "Fabio Fumarola and Andrea Ferretti"
 header-img: "img/sunrise.jpg"
-comments: true
+comments:   true
+tags:       [scala,reactive-programming]
 ---
 
 Akka Stream Concepts: Source ~> Flow ~> Sink
@@ -181,9 +182,9 @@ Source.single(1)
 .runWith(Sink.foreach(println))
 ```
 
-For example: 
+For example:
 
-- `Sink.ignore` generates a sink that consume a stream ignoring all the elements. 
+- `Sink.ignore` generates a sink that consume a stream ignoring all the elements.
 - `Sink.asPublisher[T](fanout: Boolean)` create a publisher to interact with *ReactiveStreams*.
 - be used as a publisher to another stream: `Sink.asPublisher[T](fanout: Boolean)`
 - `Sink.foreach((t: T) => Unit)` is used to apply a function to each element of the stream.
@@ -199,7 +200,7 @@ Finally Sinks can be create from graph `Sink.fromGraph[T, M](g: Graph[SinkShape[
 ## Flow
 
 The [Flow](http://doc.akka.io/api/akka/2.4.4/akka.stream.scaladsl.Flow$) class allows us to generate reusable piece of stream computation, that can be treated as operator (functions) to be composed with a Source.
-But let's start with an example. 
+But let's start with an example.
 
 ```scala
 
@@ -224,9 +225,9 @@ val flow = Source(1 to 1000)
 val result = flow.run()
 ```
 
-In the above example we transformed part of the stream processing into the method `myFlow`, that we can combine with a source using the `via` method. 
+In the above example we transformed part of the stream processing into the method `myFlow`, that we can combine with a source using the `via` method.
 If you pay attention to the signature of `myFlow()` you can see that the class Flow transform an Int to an Int and does not use materialisation parameter (`Flow[Int,Int,Mat]`).
-Source and Flow class and object expose a rich API to work with streams. 
+Source and Flow class and object expose a rich API to work with streams.
 It allows you to process your stream one element at time, doing transformation, filtering. But it offers to you operators to deal with: timers, schedulers, merge of stream with different rates, apply async operations without blocking, monitor a stream, batch your stream in windows (and sliding windows), throttle the stream to limit its speed. Finally, it gives to you also basic operators to join and merge streams, but in the following we will that using the `GraphDSL` api we can deal with multiple streams in a more elegant way.
 
 

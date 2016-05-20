@@ -5,7 +5,8 @@ subtitle:   "A first look"
 date:       2016-03-25 09:00:00
 author:     "Andrea Ferretti and Fabio Fumarola"
 header-img: "img/easter-1247634_1920.jpg"
-comments: true
+comments:   true
+tags:       [scala,reactive-programming]
 ---
 
 A first look at Akka streams
