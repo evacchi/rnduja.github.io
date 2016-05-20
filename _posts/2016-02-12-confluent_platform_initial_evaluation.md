@@ -5,7 +5,8 @@ subtitle:   "An initial evaluation"
 date:       2016-02-15 09:00:00
 author:     "Fabio Fumarola"
 header-img: "img/2015-10-26-deep_learning_with_torch_step_7_optim/cover.jpg"
-comments: true
+comments:   true
+tags:       [reactive-programming]
 ---
 
 # Confluent Platform Initial Evaluation
