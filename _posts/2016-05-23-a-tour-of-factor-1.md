@@ -9,6 +9,7 @@ comments:    true
 tags:       [concatenative-programming]
 ---
 
+
 # A panoramic tour of Factor
 
 This series is a repost from [A panoramic tour of Factor](http://andreaferretti.github.io/factor-tutorial/).
