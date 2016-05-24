@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "A tour of Factor 1"
+title:      "A tour of Factor: 1"
 subtitle:   "Getting your feet wet with concatenative programming"
 date:       2016-05-23 12:00:00
 author:     "Andrea Ferretti"

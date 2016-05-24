@@ -16,5 +16,5 @@ markdown: kramdown
 # kramdown:
 #   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
 gems: [jekyll-paginate]
-paginate: 5
+paginate: 6
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","vagga.yaml",".vagga"]
