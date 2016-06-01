@@ -6,5 +6,9 @@ containers:
 commands:
   blog: !Command
     container: blog
-    run:  jekyll serve
+    run: jekyll build
     description: Serves blog
+  shell: !Command
+    container: blog
+    run: bash
+    description: Bash
