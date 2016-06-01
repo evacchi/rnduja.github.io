@@ -3,7 +3,7 @@ layout:     post
 title:      "Akka Stream"
 subtitle:   "Source ~> Flow ~> Sink"
 date:       2016-05-06 09:00:00
-author:     "Fabio Fumarola and Andrea Ferretti"
+author:     "Fabio Fumarola"
 header-img: "img/sunrise.jpg"
 comments:   true
 tags:       [scala,reactive-programming]
