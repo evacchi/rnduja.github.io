@@ -2,7 +2,7 @@
 layout:     post
 title:      "A tour of Factor: 2"
 subtitle:   "Simplifiying flow with combinators"
-date:       2016-05-23 12:00:00
+date:       2016-05-27 12:00:00
 author:     "Andrea Ferretti"
 header-img: "img/chain.jpg"
 comments:    true
