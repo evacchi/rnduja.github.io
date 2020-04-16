@@ -2,7 +2,7 @@ containers:
   blog:
     setup:
     - !Ubuntu bionic
-    - !GemInstall [jekyll, jekyll-paginate]
+    - !GemInstall ["jekyll:3.8.5", jekyll-paginate]
 commands:
   blog: !Command
     container: blog
